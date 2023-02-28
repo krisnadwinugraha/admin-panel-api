@@ -11,17 +11,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
-            <td>{{ item.name }}</td>
+          <tr v-for="product in products" :key="product.name">
+            <td>{{ product.name }}</td>
             <td>
-              {{ item.deskripsi }}
+              {{ product.deskripsi }}
             </td>
             <td>
-              {{ item.harga }}
+              {{ product.harga }}
             </td>
             <td>
-              <v-btn color="primary" class="me-3"> Edit </v-btn>
-              <v-btn color="danger" outlined class="btn btn-sm"> Delete </v-btn>
+              <router-link :to="{ name: 'productEdit', params: { id: product.id } }" class="btn btn-success"
+                ><v-btn color="primary" class="me-3"> Edit </v-btn></router-link
+              >
+              <v-btn color="danger" outlined @click="deleteProduct(product.id)" class="btn btn-danger">Delete</v-btn>
             </td>
           </tr>
         </tbody>
@@ -33,8 +35,43 @@
 <script>
 import { mdiAlertOutline, mdiCloudUploadOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
+import axios from 'axios'
 
 export default {
+  name: 'products',
+  data() {
+    return {
+      products: [],
+    }
+  },
+  mounted() {
+    this.getProducts()
+  },
+  methods: {
+    async getProducts() {
+      await axios
+        .get('/api/products')
+        .then(response => {
+          this.products = response.data
+        })
+        .catch(error => {
+          console.log(error)
+          this.products = []
+        })
+    },
+    deleteProduct(id) {
+      if (confirm('Are you sure to delete this category ?')) {
+        axios
+          .delete(`/api/products/${id}`)
+          .then(response => {
+            this.getProducts()
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
+    },
+  },
   props: {
     indexData: {
       type: Object,
@@ -43,34 +80,6 @@ export default {
   },
   setup(props) {
     const status = ['Active', 'Inactive', 'Pending', 'Closed']
-
-    const desserts = [
-      {
-        name: 'Product 1',
-        deskripsi: 'product',
-        harga: '100000',
-      },
-      {
-        name: 'Product 2',
-        deskripsi: 'product',
-        harga: '100000',
-      },
-      {
-        name: 'Product 3',
-        deskripsi: 'product',
-        harga: '100000',
-      },
-      {
-        name: 'Product 4',
-        deskripsi: 'product',
-        harga: '100000',
-      },
-      {
-        name: 'Product 5',
-        deskripsi: 'product',
-        harga: '100000',
-      },
-    ]
 
     const indexDataLocale = ref(JSON.parse(JSON.stringify(props.indexData)))
 
@@ -81,7 +90,6 @@ export default {
     return {
       status,
       indexDataLocale,
-      desserts,
       resetForm,
       icons: {
         mdiAlertOutline,

@@ -10,14 +10,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
-            <td>{{ item.name }}</td>
+          <tr v-for="category in categories" :key="category.name">
+            <td>{{ category.name }}</td>
             <td>
-              {{ item.deskripsi }}
+              {{ category.deskripsi }}
             </td>
             <td>
-              <v-btn color="primary" class="me-3"> Edit </v-btn>
-              <v-btn color="danger" outlined class="btn btn-sm"> Delete </v-btn>
+              <router-link :to="{ name: 'categoryEdit', params: { id: category.id } }" class="btn btn-success"
+                ><v-btn color="primary" class="me-3"> Edit </v-btn></router-link
+              >
+              <v-btn color="danger" outlined @click="deleteCategory(category.id)" class="btn btn-danger">Delete</v-btn>
             </td>
           </tr>
         </tbody>
@@ -29,8 +31,43 @@
 <script>
 import { mdiAlertOutline, mdiCloudUploadOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
+import axios from 'axios'
 
 export default {
+  name: 'categories',
+  data() {
+    return {
+      categories: [],
+    }
+  },
+  mounted() {
+    this.getCategories()
+  },
+  methods: {
+    async getCategories() {
+      await axios
+        .get('/api/categories')
+        .then(response => {
+          this.categories = response.data
+        })
+        .catch(error => {
+          console.log(error)
+          this.categories = []
+        })
+    },
+    deleteCategory(id) {
+      if (confirm('Are you sure to delete this category ?')) {
+        axios
+          .delete(`/api/categories/${id}`)
+          .then(response => {
+            this.getCategories()
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
+    },
+  },
   props: {
     indexData: {
       type: Object,
@@ -39,29 +76,6 @@ export default {
   },
   setup(props) {
     const status = ['Active', 'Inactive', 'Pending', 'Closed']
-
-    const desserts = [
-      {
-        name: 'Deskripsi 1',
-        deskripsi: 'deskripsi',
-      },
-      {
-        name: 'Deskripsi 2',
-        deskripsi: 'deskripsi',
-      },
-      {
-        name: 'Deskripsi 3',
-        deskripsi: 'deskripsi',
-      },
-      {
-        name: 'Deskripsi 4',
-        deskripsi: 'deskripsi',
-      },
-      {
-        name: 'Deskripsi 5',
-        deskripsi: 'deskripsi',
-      },
-    ]
 
     const indexDataLocale = ref(JSON.parse(JSON.stringify(props.indexData)))
 
@@ -72,7 +86,6 @@ export default {
     return {
       status,
       indexDataLocale,
-      desserts,
       resetForm,
       icons: {
         mdiAlertOutline,
