@@ -6,7 +6,7 @@
         <v-card-title class="d-flex align-center justify-center py-7">
           <router-link to="/" class="d-flex align-center">
             <v-img
-              :src="require('@/assets/images/logos/logo.svg').default"
+              :src="require('@/assets/images/logos/logo-spasi.png').default"
               max-height="30px"
               max-width="30px"
               alt="logo"

@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="mt-5">
+  <v-card flat class="my-5 mx-5">
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -82,34 +82,6 @@ export default {
   setup(props) {
     const status = ['Active', 'Inactive', 'Pending', 'Closed']
 
-    const blogs = [
-      {
-        title: 'User 1',
-        category: 'Bebas',
-        content: 'Lorem ipsum dolor sit ',
-      },
-      {
-        title: 'User 2',
-        category: 'Bebas',
-        content: 'Lorem ipsum dolor sit ',
-      },
-      {
-        title: 'User 3',
-        category: 'Bebas',
-        content: 'Lorem ipsum dolor sit ',
-      },
-      {
-        title: 'User 4',
-        category: 'Bebas',
-        content: 'Lorem ipsum dolor sit ',
-      },
-      {
-        title: 'User 5',
-        category: 'Bebas',
-        content: 'Lorem ipsum dolor sit ',
-      },
-    ]
-
     const indexDataLocale = ref(JSON.parse(JSON.stringify(props.indexData)))
 
     const resetForm = () => {
@@ -119,7 +91,6 @@ export default {
     return {
       status,
       indexDataLocale,
-      blogs,
       resetForm,
       icons: {
         mdiAlertOutline,

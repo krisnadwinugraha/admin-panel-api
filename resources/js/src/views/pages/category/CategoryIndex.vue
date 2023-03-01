@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="mt-5">
+  <v-card flat class="my-5 mx-5">
     <v-simple-table>
       <template v-slot:default>
         <thead>

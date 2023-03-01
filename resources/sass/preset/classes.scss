@@ -5,7 +5,7 @@
 // ————————————————————————————————————
 
 .bg-gradient-primary {
-  background: linear-gradient(98deg, #c48eff, var(--v-primary-base) 94%);
+  background: linear-gradient(98deg, #f56060, var(--v-primary-base) 94%);
 }
 
 @include theme--child(bg-card) using ($material) {
