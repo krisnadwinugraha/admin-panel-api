@@ -54,14 +54,29 @@ const routes = [
     component: () => import('@/views/pages/blog/Blog.vue'),
   },
   {
+    path: '/pages/blogs/:id/edit',
+    name: 'blog-edit',
+    component: () => import('@/views/pages/blog/BlogEdit.vue'),
+  },
+  {
     path: '/pages/categories',
     name: 'pages-categories',
     component: () => import('@/views/pages/category/Category.vue'),
   },
   {
+    path: '/pages/categories/:id/edit',
+    name: 'category-edit',
+    component: () => import('@/views/pages/category/CategoryEdit.vue'),
+  },
+  {
     path: '/pages/products',
     name: 'pages-products',
     component: () => import('@/views/pages/product/Product.vue'),
+  },
+  {
+    path: '/pages/products/:id/edit',
+    name: 'product-edit',
+    component: () => import('@/views/pages/product/ProductEdit.vue'),
   },
   {
     path: '/pages/reports',
@@ -72,11 +87,6 @@ const routes = [
     path: '/pages/roles',
     name: 'pages-roles',
     component: () => import('@/views/pages/role/Role.vue'),
-  },
-  {
-    path: '/pages/users',
-    name: 'pages-users',
-    component: () => import('@/views/pages/users/User.vue'),
   },
   {
     path: '/pages/login',

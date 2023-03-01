@@ -38,5 +38,10 @@ class CategorySeeder extends Seeder
             'name' => 'category 5',
             'deskripsi' => 'deskripsi category 5',
         ]);
+
+        Category::create([
+            'name' => 'category 6',
+            'deskripsi' => 'deskripsi category 6',
+        ]);
     }
 }

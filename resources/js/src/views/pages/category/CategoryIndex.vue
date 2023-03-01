@@ -16,7 +16,7 @@
               {{ category.deskripsi }}
             </td>
             <td>
-              <router-link :to="{ name: 'categoryEdit', params: { id: category.id } }" class="btn btn-success"
+              <router-link :to="{ name: 'category-edit', params: { id: category.id } }" class="btn btn-success"
                 ><v-btn color="primary" class="me-3"> Edit </v-btn></router-link
               >
               <v-btn color="danger" outlined @click="deleteCategory(category.id)" class="btn btn-danger">Delete</v-btn>
@@ -48,7 +48,7 @@ export default {
       await axios
         .get('/api/categories')
         .then(response => {
-          this.categories = response.data
+          this.categories = response.data.data
         })
         .catch(error => {
           console.log(error)

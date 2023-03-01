@@ -43,5 +43,11 @@ class ProductSeeder extends Seeder
             'deskripsi' => 'deskripsi product 5',
             'harga' => '60000',
         ]);
+
+        Product::create([
+            'name' => 'product 6',
+            'deskripsi' => 'deskripsi product 6',
+            'harga' => '60000',
+        ]);
     }
 }

@@ -6,7 +6,7 @@
         <v-card-title class="d-flex align-center justify-center py-7">
           <router-link to="/" class="d-flex align-center">
             <v-img
-              :src="require('@/assets/images/logos/logo-spasi.png').default"
+              :src="require('@/assets/images/logos/logo-spasi.png')"
               max-height="30px"
               max-width="30px"
               alt="logo"
@@ -86,19 +86,14 @@
     <img
       class="auth-mask-bg"
       height="173"
-      :src="require(`@/assets/images/misc/mask-${$vuetify.theme.dark ? 'dark' : 'light'}.png`).default"
+      :src="require(`@/assets/images/misc/mask-${$vuetify.theme.dark ? 'dark' : 'light'}.png`)"
     />
 
     <!-- tree -->
-    <v-img class="auth-tree" width="247" height="185" :src="require('@/assets/images/misc/tree.png').default"></v-img>
+    <v-img class="auth-tree" width="247" height="185" :src="require('@/assets/images/misc/tree.png')"></v-img>
 
     <!-- tree  -->
-    <v-img
-      class="auth-tree-3"
-      width="377"
-      height="289"
-      :src="require('@/assets/images/misc/tree-3.png').default"
-    ></v-img>
+    <v-img class="auth-tree-3" width="377" height="289" :src="require('@/assets/images/misc/tree-3.png')"></v-img>
   </div>
 </template>
 

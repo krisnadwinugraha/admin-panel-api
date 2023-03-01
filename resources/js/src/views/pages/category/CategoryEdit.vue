@@ -1,16 +1,16 @@
 <template>
   <v-card flat class="mt-5">
-    <v-form>
+    <v-form @submit.prevent="update">
       <div class="px-3">
         <v-card-text class="pt-5">
           <v-row>
             <v-col cols="12" sm="8" md="6">
-              <h2 class="mb-5">Create User</h2>
+              <h2 class="mb-5">Edit Category</h2>
               <!-- Name -->
-              <v-text-field v-model="Name" :type="'text'" label="Name" outlined dense></v-text-field>
+              <v-text-field v-model="category.name" :type="'text'" label="name" outlined dense></v-text-field>
 
-              <!-- Role -->
-              <v-text-field v-model="Role" :type="'text'" label="Role" outlined dense persistent-hint></v-text-field>
+              <!-- Deskripsi -->
+              <v-text-field v-model="category.deskripsi" :type="'text'" label="deskripsi" outlined dense></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">
@@ -28,7 +28,7 @@
       <div class="pa-3">
         <!-- action buttons -->
         <v-card-text>
-          <v-btn color="primary" class="me-3 mt-3"> Save changes </v-btn>
+          <v-btn color="primary" type="submit" class="me-3 mt-3"> Save changes </v-btn>
           <v-btn color="secondary" outlined class="mt-3"> Cancel </v-btn>
         </v-card-text>
       </div>
@@ -40,15 +40,46 @@
 // eslint-disable-next-line object-curly-newline
 import { mdiKeyOutline, mdiLockOpenOutline, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
+import axios from 'axios'
 
 export default {
-  setup() {
-    const Name = ref()
-    const Role = ref()
-
+  data() {
     return {
-      Name,
-      Role,
+      category: {
+        name: '',
+        deskripsi: '',
+      },
+    }
+  },
+  mounted() {
+    this.showBlog()
+  },
+  methods: {
+    async showBlog() {
+      await axios
+        .get(`/api/categories/${this.$route.params.id}`)
+        .then(response => {
+          const { name, deskripsi } = response.data
+          this.category.name = name
+          this.category.deskripsi = deskripsi
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    async update() {
+      await axios
+        .patch(`/api/categories/${this.$route.params.id}`, this.category)
+        .then(response => {
+          this.$router.push({ name: 'pages-categories' })
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+  },
+  setup() {
+    return {
       icons: {
         mdiKeyOutline,
         mdiLockOpenOutline,

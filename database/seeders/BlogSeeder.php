@@ -43,5 +43,11 @@ class BlogSeeder extends Seeder
             'category' => '1',
             'content' => 'Lorem ipsum dolor sit',
         ]);
+
+        Blog::create([
+            'title' => 'Judul Blog 6',
+            'category' => '2',
+            'content' => 'Lorem ipsum dolor sit',
+        ]);
     }
 }

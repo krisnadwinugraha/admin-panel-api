@@ -20,7 +20,7 @@
               {{ product.harga }}
             </td>
             <td>
-              <router-link :to="{ name: 'productEdit', params: { id: product.id } }" class="btn btn-success"
+              <router-link :to="{ name: 'product-edit', params: { id: product.id } }" class="btn btn-success"
                 ><v-btn color="primary" class="me-3"> Edit </v-btn></router-link
               >
               <v-btn color="danger" outlined @click="deleteProduct(product.id)" class="btn btn-danger">Delete</v-btn>
@@ -52,7 +52,7 @@ export default {
       await axios
         .get('/api/products')
         .then(response => {
-          this.products = response.data
+          this.products = response.data.data
         })
         .catch(error => {
           console.log(error)

@@ -35,14 +35,6 @@
         <nav-menu-link title="Register" :to="{ name: 'pages-register' }" target="_blank"></nav-menu-link>
         <nav-menu-link title="Error" :to="{ name: 'error-404' }" target="_blank"></nav-menu-link>
       </nav-menu-group>
-      <nav-menu-section-title title="USER MANAGEMENT"></nav-menu-section-title>
-      <nav-menu-link title="User" :to="{ name: 'pages-users' }" :icon="icons.mdiAccountOutline"></nav-menu-link>
-      <nav-menu-link title="Role" :to="{ name: 'pages-roles' }" :icon="icons.mdiAccountAlertOutline"></nav-menu-link>
-      <nav-menu-link
-        title="Account Settings"
-        :to="{ name: 'pages-account-settings' }"
-        :icon="icons.mdiAccountCogOutline"
-      ></nav-menu-link>
 
       <nav-menu-section-title title="CONTENT MANAGEMENT"></nav-menu-section-title>
       <nav-menu-link
@@ -56,6 +48,15 @@
         :icon="icons.mdiClipboardOutline"
       ></nav-menu-link>
       <nav-menu-link title="Product" :to="{ name: 'pages-products' }" :icon="icons.mdiDiamondOutline"></nav-menu-link>
+
+      <nav-menu-section-title title="USER MANAGEMENT"></nav-menu-section-title>
+      <nav-menu-link title="User" :to="{ name: 'pages-users' }" :icon="icons.mdiAccountOutline"></nav-menu-link>
+      <nav-menu-link title="Role" :to="{ name: 'pages-roles' }" :icon="icons.mdiAccountAlertOutline"></nav-menu-link>
+      <nav-menu-link
+        title="Account Settings"
+        :to="{ name: 'pages-account-settings' }"
+        :icon="icons.mdiAccountCogOutline"
+      ></nav-menu-link>
 
       <nav-menu-section-title title="REPORT"></nav-menu-section-title>
       <nav-menu-link
@@ -71,19 +72,6 @@
       <nav-menu-link title="Tables" :to="{ name: 'simple-table' }" :icon="icons.mdiTable"></nav-menu-link>
       <nav-menu-link title="Form Layouts" :to="{ name: 'form-layouts' }" :icon="icons.mdiFormSelect"></nav-menu-link>
     </v-list>
-    <a
-      href="https://themeselection.com/products/materio-vuetify-vuejs-laravel-admin-template"
-      target="_blank"
-      rel="nofollow"
-    >
-      <v-img
-        :src="require(`@/assets/images/pro/upgrade-banner-${$vuetify.theme.dark ? 'dark' : 'light'}.png`).default"
-        alt="upgrade-banner"
-        transition="scale-transition"
-        class="upgrade-banner mx-auto"
-        max-width="230"
-      ></v-img>
-    </a>
   </v-navigation-drawer>
 </template>
 
@@ -177,17 +165,6 @@ export default {
         }
       }
     }
-  }
-}
-
-// You can remove below style
-// Upgrade Banner
-.app-navigation-menu {
-  .upgrade-banner {
-    position: absolute;
-    bottom: 13px;
-    left: 50%;
-    transform: translateX(-50%);
   }
 }
 </style>

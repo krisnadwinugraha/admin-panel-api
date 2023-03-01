@@ -1,11 +1,11 @@
 <template>
   <v-card flat class="mt-5">
-    <v-form @submit.prevent="create">
+    <v-form @submit.prevent="update">
       <div class="px-3">
         <v-card-text class="pt-5">
           <v-row>
             <v-col cols="12" sm="8" md="6">
-              <h2 class="mb-5">Create Blog</h2>
+              <h2 class="mb-5">Edit Blog</h2>
               <!-- Title -->
               <v-text-field v-model="blog.title" :type="'text'" label="Title" outlined dense></v-text-field>
 
@@ -55,13 +55,28 @@ export default {
       },
     }
   },
+  mounted() {
+    this.showBlog()
+  },
   methods: {
-    async create() {
+    async showBlog() {
       await axios
-        .post('/api/blogs', this.blog)
+        .get(`/api/blogs/${this.$route.params.id}`)
+        .then(response => {
+          const { title, category, content } = response.data
+          this.blog.title = title
+          this.blog.category = category
+          this.blog.content = content
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    async update() {
+      await axios
+        .patch(`/api/blogs/${this.$route.params.id}`, this.blog)
         .then(response => {
           this.$router.push({ name: 'pages-blogs' })
-          console.log(success)
         })
         .catch(error => {
           console.log(error)

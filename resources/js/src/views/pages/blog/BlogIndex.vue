@@ -20,7 +20,7 @@
               {{ blog.content }}
             </td>
             <td>
-              <router-link :to="{ name: 'blogEdit', params: { id: blog.id } }" class="btn btn-success"
+              <router-link :to="{ name: 'blog-edit', params: { id: blog.id } }" class="btn btn-success"
                 ><v-btn color="primary" class="me-3"> Edit </v-btn></router-link
               >
               <v-btn color="danger" outlined @click="deleteBlog(blog.id)" class="btn btn-danger">Delete</v-btn>
@@ -52,7 +52,7 @@ export default {
       await axios
         .get('/api/blogs')
         .then(response => {
-          this.blogs = response.data
+          this.blogs = response.data.data
         })
         .catch(error => {
           console.log(error)

@@ -48,7 +48,7 @@ export default {
     // account settings data
     const categoryData = {
       index: {
-        avatarImg: require('@/assets/images/avatars/1.png').default,
+        avatarImg: require('@/assets/images/avatars/1.png'),
         categoryname: 'johnDoe',
         name: 'john Doe',
         email: 'johnDoe@example.com',

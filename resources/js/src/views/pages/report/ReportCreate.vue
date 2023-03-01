@@ -14,7 +14,7 @@
               <v-img
                 contain
                 max-width="170"
-                :src="require('@/assets/images/3d-characters/pose-m-1.png').default"
+                :src="require('@/assets/images/3d-characters/pose-m-1.png')"
                 class="security-character"
               ></v-img>
             </v-col>

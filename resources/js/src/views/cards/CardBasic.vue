@@ -4,7 +4,7 @@
       <!-- Influencing The Influencer -->
       <v-col md="4" sm="6" cols="12">
         <v-card>
-          <v-img :src="require('@/assets/images/pages/card-basic-influencer.png').default" height="250" />
+          <v-img :src="require('@/assets/images/pages/card-basic-influencer.png')" height="250" />
           <v-card-title> Influencing The Influencer </v-card-title>
           <v-card-text>
             Cancun is back, better than ever! Over a hundred Mexico resorts have reopened and the state tourism minister
@@ -17,13 +17,13 @@
         <v-card>
           <v-img
             class="white--text align-end"
-            :src="require('@/assets/images/pages/card-basic-person.png').default"
+            :src="require('@/assets/images/pages/card-basic-person.png')"
             height="250"
           />
           <v-card-text class="position-relative">
             <!-- User Avatar -->
             <v-avatar size="60" color="white" class="avatar-center">
-              <v-img :src="require('@/assets/images/avatars/1.png').default"></v-img>
+              <v-img :src="require('@/assets/images/avatars/1.png')"></v-img>
             </v-avatar>
             <!-- Title, Subtitle & Action Button -->
             <div class="d-flex justify-space-between flex-wrap pt-12">
@@ -38,7 +38,7 @@
               <span class="text--primary font-weight-medium"> 18 mutual friends </span>
 
               <v-avatar size="40">
-                <v-img :src="require('@/assets/images/avatars/2.png').default"></v-img>
+                <v-img :src="require('@/assets/images/avatars/2.png')"></v-img>
               </v-avatar>
             </div>
           </v-card-text>
@@ -47,7 +47,7 @@
       <!-- card explore -->
       <v-col md="4" sm="6" cols="12" class="align-self-start">
         <v-card>
-          <v-img :src="require('@/assets/images/pages/card-basic-person.png').default" height="250"></v-img>
+          <v-img :src="require('@/assets/images/pages/card-basic-person.png')" height="250"></v-img>
           <v-card-title> Popular Uses Of The Internet </v-card-title>
           <v-card-text> Although cards can support multiple actions, UI controls, and an overflow menu. </v-card-text>
           <v-card-actions class="dense">
@@ -76,11 +76,7 @@
         <v-card class="d-flex align-center">
           <div class="d-flex justify-space-between flex-wrap flex-md-nowrap flex-column flex-md-row">
             <div class="mx-auto">
-              <v-img
-                width="220"
-                height="100%"
-                :src="require('@/assets/images/pages/card-basic-mobile.png').default"
-              ></v-img>
+              <v-img width="220" height="100%" :src="require('@/assets/images/pages/card-basic-mobile.png')"></v-img>
             </div>
             <v-divider :vertical="$vuetify.breakpoint.mdAndUp"></v-divider>
             <div>
@@ -131,7 +127,7 @@
             </div>
             <div class="pa-4">
               <v-img
-                :src="require('@/assets/images/pages/card-basic-clock.jpg').default"
+                :src="require('@/assets/images/pages/card-basic-clock.jpg')"
                 :class="$vuetify.breakpoint.mdAndUp ? 'rounded-lg' : 'rounded-0'"
                 height="100%"
                 :max-width="$vuetify.breakpoint.mdAndUp ? '220' : '100%'"
@@ -143,7 +139,7 @@
       <!-- Apple Watch card -->
       <v-col lg="4" sm="6" cols="12" class="align-self-start">
         <v-card>
-          <v-img :src="require('@/assets/images/pages/card-basic-brown-watch.jpg').default"></v-img>
+          <v-img :src="require('@/assets/images/pages/card-basic-brown-watch.jpg')"></v-img>
           <v-card-title>Apple Watch</v-card-title>
           <v-card-text>
             <p class="text--primary text-base">$249.40</p>

@@ -48,7 +48,7 @@ export default {
     // account settings data
     const userData = {
       index: {
-        avatarImg: require('@/assets/images/avatars/1.png').default,
+        avatarImg: require('@/assets/images/avatars/1.png'),
         username: 'johnDoe',
         name: 'john Doe',
         email: 'johnDoe@example.com',

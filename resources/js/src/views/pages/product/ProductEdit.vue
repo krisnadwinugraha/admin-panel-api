@@ -1,19 +1,19 @@
 <template>
   <v-card flat class="mt-5">
-    <v-form @submit.prevent="create">
+    <v-form @submit.prevent="update">
       <div class="px-3">
         <v-card-text class="pt-5">
           <v-row>
             <v-col cols="12" sm="8" md="6">
-              <h2 class="mb-5">Create Blog</h2>
-              <!-- Title -->
-              <v-text-field v-model="blog.title" :type="'text'" label="Title" outlined dense></v-text-field>
+              <h2 class="mb-5">Edit Product</h2>
+              <!-- Name -->
+              <v-text-field v-model="product.name" :type="'text'" label="name" outlined dense></v-text-field>
 
-              <!-- Category -->
-              <v-text-field v-model="blog.category" :type="'text'" label="Category" outlined dense></v-text-field>
+              <!-- Deskripsi -->
+              <v-text-field v-model="product.deskripsi" :type="'text'" label="deskripsi" outlined dense></v-text-field>
 
-              <!-- Content -->
-              <v-text-field v-model="blog.content" :type="'text'" label="Content" outlined dense></v-text-field>
+              <!-- Harga -->
+              <v-text-field v-model="product.harga" :type="'text'" label="harga" outlined dense></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">
@@ -48,20 +48,35 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      blog: {
-        title: '',
-        category: '',
-        content: '',
+      product: {
+        name: '',
+        deskripsi: '',
+        harga: '',
       },
     }
   },
+  mounted() {
+    this.showProduct()
+  },
   methods: {
-    async create() {
+    async showProduct() {
       await axios
-        .post('/api/blogs', this.blog)
+        .get(`/api/products/${this.$route.params.id}`)
         .then(response => {
-          this.$router.push({ name: 'pages-blogs' })
-          console.log(success)
+          const { name, deskripsi, harga } = response.data
+          this.product.name = name
+          this.product.deskripsi = deskripsi
+          this.product.harga = harga
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    async update() {
+      await axios
+        .patch(`/api/products/${this.$route.params.id}`, this.product)
+        .then(response => {
+          this.$router.push({ name: 'pages-products' })
         })
         .catch(error => {
           console.log(error)
