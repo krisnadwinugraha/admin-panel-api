@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
+Route::resource('users', UserController::class)->only(['index','store','show','update','destroy']);
 Route::resource('categories', CategoryController::class)->only(['index','store','show','update','destroy']);
 Route::resource('products', ProductController::class)->only(['index','store','show','update','destroy']);
 Route::resource('blogs', BlogController::class)->only(['index','store','show','update','destroy']);
