@@ -6,6 +6,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,19 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::resource('users', UserController::class)->only(['index','store','show','update','destroy']);
-Route::resource('categories', CategoryController::class)->only(['index','store','show','update','destroy']);
-Route::resource('products', ProductController::class)->only(['index','store','show','update','destroy']);
-Route::resource('blogs', BlogController::class)->only(['index','store','show','update','destroy']);
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('auth')->group(function(){
+    Route::post('login',[AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::get('profile', [AuthController::class, 'profile']);
+        Route::post('logout', [AuthController::class, 'logout']);
+       
+    });
+    
+});
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::resource('users', UserController::class)->only(['index','store','show','update','destroy']);
+    Route::resource('categories', CategoryController::class)->only(['index','store','show','update','destroy']);
+    Route::resource('products', ProductController::class)->only(['index','store','show','update','destroy']);
+    Route::resource('blogs', BlogController::class)->only(['index','store','show','update','destroy']);
 });

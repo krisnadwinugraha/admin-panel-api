@@ -14,7 +14,7 @@
               class="me-3"
             ></v-img>
 
-            <h2 class="text-2xl font-weight-semibold">Materio</h2>
+            <h2 class="text-2xl font-weight-semibold">Spasi Digicode</h2>
           </router-link>
         </v-card-title>
 
@@ -28,7 +28,7 @@
         <v-card-text>
           <v-form>
             <v-text-field
-              v-model="username"
+              v-model="user.name"
               outlined
               label="Username"
               placeholder="JohnDoe"
@@ -37,7 +37,7 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="email"
+              v-model="user.email"
               outlined
               label="Email"
               placeholder="john@example.com"
@@ -46,7 +46,7 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="password"
+              v-model="user.password"
               outlined
               :type="isPasswordVisible ? 'text' : 'password'"
               label="Password"
@@ -64,7 +64,7 @@
               </template>
             </v-checkbox>
 
-            <v-btn block color="primary" class="mt-6"> Sign Up </v-btn>
+            <v-btn @click="register()" block color="primary" class="mt-6"> Sign Up </v-btn>
           </v-form>
         </v-card-text>
 
@@ -73,22 +73,6 @@
           <span class="me-2"> Already have an account? </span>
           <router-link :to="{ name: 'pages-login' }"> Sign in instead </router-link>
         </v-card-text>
-
-        <!-- divider -->
-        <v-card-text class="d-flex align-center mt-2">
-          <v-divider></v-divider>
-          <span class="mx-5">or</span>
-          <v-divider></v-divider>
-        </v-card-text>
-
-        <!-- social link -->
-        <v-card-actions class="d-flex justify-center">
-          <v-btn v-for="link in socialLink" :key="link.icon" icon class="ms-1">
-            <v-icon :color="$vuetify.theme.dark ? link.colorInDark : link.color">
-              {{ link.icon }}
-            </v-icon>
-          </v-btn>
-        </v-card-actions>
       </v-card>
     </div>
 
@@ -111,8 +95,33 @@
 // eslint-disable-next-line object-curly-newline
 import { mdiFacebook, mdiTwitter, mdiGithub, mdiGoogle, mdiEyeOutline, mdiEyeOffOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
+import Auth from '../../Auth'
+import axios from 'axios'
 
 export default {
+  data() {
+    return {
+      user: {
+        name: '',
+        email: '',
+        password: '',
+      },
+    }
+  },
+
+  methods: {
+    register() {
+      console.log(this.user)
+      axios
+        .post('http://127.0.0.1:8000/api/auth/register', this.user)
+        .then(({ data }) => {
+          this.$router.push('/login')
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+  },
   setup() {
     const isPasswordVisible = ref(false)
     const username = ref('')
