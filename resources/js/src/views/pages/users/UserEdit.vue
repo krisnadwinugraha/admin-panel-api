@@ -5,7 +5,7 @@
         <v-card-text class="pt-5">
           <v-row>
             <v-col cols="12" sm="8" md="6">
-              <h2 class="mb-5">Edit Product</h2>
+              <h2 class="mb-5">Edit User</h2>
               <!-- Name -->
               <v-text-field v-model="user.name" :type="'text'" label="name" outlined dense></v-text-field>
 
