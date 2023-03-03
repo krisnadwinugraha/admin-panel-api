@@ -44,4 +44,11 @@ class CategoryController extends Controller
             'message'=>'Category Deleted Successfully!!'
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $categories = Category::where('name', 'like', '%' . $request->keywords . '%')
+        ->orWhere('deskripsi', 'like', '%' . $request->keywords . '%')->paginate(5);
+        return response()->json($categories); 
+    }
 }

@@ -1,5 +1,18 @@
 <template>
   <v-card flat class="my-5 mx-5">
+    <div class="d-flex align-center mx-6 my-5">
+      <v-spacer></v-spacer>
+      <v-text-field
+        rounded
+        dense
+        outlined
+        :prepend-inner-icon="icons.mdiMagnify"
+        class="app-bar-search flex-grow-0"
+        hide-details
+        type="'text'"
+        v-model="keywords"
+      ></v-text-field>
+    </div>
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -10,27 +23,87 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
-            <td>{{ item.name }}</td>
+          <tr v-for="user in users" :key="user.name">
+            <td>{{ user.name }}</td>
             <td>
-              {{ item.email }}
+              {{ user.email }}
             </td>
             <td>
-              <v-btn color="primary" class="me-3"> Edit </v-btn>
-              <v-btn color="danger" outlined class="btn btn-sm"> Delete </v-btn>
+              <router-link :to="{ name: 'user-edit', params: { id: user.id } }" class="btn btn-success"
+                ><v-btn color="primary" class="me-3"> Edit </v-btn></router-link
+              >
+              <v-btn color="danger" outlined @click="deleteUser(user.id)" class="btn btn-danger">Delete</v-btn>
             </td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
+    <div class="d-flex align-center mx-6 my-5">
+      <v-spacer></v-spacer>
+      <v-btn color="primary" :disabled="currentPage === 1" @click="changePage(-1)">Prev</v-btn>
+      <v-btn color="primary" :disabled="currentPage === lastPage" @click="changePage(1)">Next >></v-btn>
+    </div>
   </v-card>
 </template>
 
 <script>
-import { mdiAlertOutline, mdiCloudUploadOutline } from '@mdi/js'
+import { mdiAlertOutline, mdiMagnify, mdiCloudUploadOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
+import axios from 'axios'
 
 export default {
+  data() {
+    return {
+      users: [],
+      keywords: null,
+      lastPage: '',
+      currentPage: 1,
+    }
+  },
+  watch: {
+    keywords(after, before) {
+      this.fetch()
+    },
+  },
+  mounted() {
+    this.getUser()
+  },
+  methods: {
+    async getUser() {
+      await axios
+        .get(`/api/users?page=${this.currentPage}`)
+        .then(response => {
+          this.users = response.data.data
+          this.lastPage = response.data.last_page
+        })
+        .catch(error => {
+          console.log(error)
+          this.users = []
+        })
+    },
+    deleteProduct(id) {
+      if (confirm('Are you sure to delete this users ?')) {
+        axios
+          .delete(`/api/users/${id}`)
+          .then(response => {
+            this.getUser()
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
+    },
+    fetch() {
+      axios
+        .get('/user-search', { params: { keywords: this.keywords } })
+        .then(response => (this.users = response.data.data))
+        .catch(error => {})
+    },
+    changePage(num) {
+      this.currentPage = this.currentPage + num
+      this.getUser()
+    },
+  },
   props: {
     indexData: {
       type: Object,
@@ -39,29 +112,6 @@ export default {
   },
   setup(props) {
     const status = ['Active', 'Inactive', 'Pending', 'Closed']
-
-    const desserts = [
-      {
-        name: 'User 1',
-        email: 'user1@gmail.com',
-      },
-      {
-        name: 'User 2',
-        email: 'user2@gmail.com',
-      },
-      {
-        name: 'User 3',
-        email: 'user3@gmail.com',
-      },
-      {
-        name: 'User 4',
-        email: 'user4@gmail.com',
-      },
-      {
-        name: 'User 5',
-        email: 'user5@gmail.com',
-      },
-    ]
 
     const indexDataLocale = ref(JSON.parse(JSON.stringify(props.indexData)))
 
@@ -72,10 +122,10 @@ export default {
     return {
       status,
       indexDataLocale,
-      desserts,
       resetForm,
       icons: {
         mdiAlertOutline,
+        mdiMagnify,
         mdiCloudUploadOutline,
       },
     }

@@ -74,6 +74,14 @@ const routes = [
     },
   },
   {
+    path: '/pages/users/:id/edit',
+    name: 'user-edit',
+    component: () => import('@/views/pages/users/UserEdit.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/pages/blogs',
     name: 'pages-blogs',
     component: () => import('@/views/pages/blog/Blog.vue'),

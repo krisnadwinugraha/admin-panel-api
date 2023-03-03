@@ -137,9 +137,7 @@ export default {
       loggedUser: this.auth.user,
     }
   },
-  mounted() {
-    console.log(this.auth.user)
-  },
+  mounted() {},
   methods: {
     logout() {
       axios

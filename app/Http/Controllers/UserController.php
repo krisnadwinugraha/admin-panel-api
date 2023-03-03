@@ -43,4 +43,11 @@ class UserController extends Controller
             'message'=>'User Deleted Successfully!!'
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $users = User::where('name', 'like', '%' . $request->keywords . '%')
+        ->orWhere('email', 'like', '%' . $request->keywords . '%')->paginate(5);
+        return response()->json($users); 
+    }
 }

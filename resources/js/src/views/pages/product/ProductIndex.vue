@@ -1,5 +1,18 @@
 <template>
   <v-card flat class="my-5 mx-5">
+    <div class="d-flex align-center mx-6 my-5">
+      <v-spacer></v-spacer>
+      <v-text-field
+        rounded
+        dense
+        outlined
+        :prepend-inner-icon="icons.mdiMagnify"
+        class="app-bar-search flex-grow-0"
+        hide-details
+        type="'text'"
+        v-model="keywords"
+      ></v-text-field>
+    </div>
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -29,11 +42,16 @@
         </tbody>
       </template>
     </v-simple-table>
+    <div class="d-flex align-center mx-6 my-5">
+      <v-spacer></v-spacer>
+      <v-btn color="primary" :disabled="currentPage === 1" @click="changePage(-1)">Prev</v-btn>
+      <v-btn color="primary" :disabled="currentPage === lastPage" @click="changePage(1)">Next >></v-btn>
+    </div>
   </v-card>
 </template>
 
 <script>
-import { mdiAlertOutline, mdiCloudUploadOutline } from '@mdi/js'
+import { mdiAlertOutline, mdiMagnify, mdiCloudUploadOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
 import axios from 'axios'
 
@@ -42,7 +60,15 @@ export default {
   data() {
     return {
       products: [],
+      keywords: null,
+      lastPage: '',
+      currentPage: 1,
     }
+  },
+  watch: {
+    keywords(after, before) {
+      this.fetch()
+    },
   },
   mounted() {
     this.getProducts()
@@ -50,9 +76,10 @@ export default {
   methods: {
     async getProducts() {
       await axios
-        .get('/api/products')
+        .get(`/api/products?page=${this.currentPage}`)
         .then(response => {
           this.products = response.data.data
+          this.lastPage = response.data.last_page
         })
         .catch(error => {
           console.log(error)
@@ -60,7 +87,7 @@ export default {
         })
     },
     deleteProduct(id) {
-      if (confirm('Are you sure to delete this category ?')) {
+      if (confirm('Are you sure to delete this products ?')) {
         axios
           .delete(`/api/products/${id}`)
           .then(response => {
@@ -70,6 +97,16 @@ export default {
             console.log(error)
           })
       }
+    },
+    fetch() {
+      axios
+        .get('/product-search', { params: { keywords: this.keywords } })
+        .then(response => (this.products = response.data.data))
+        .catch(error => {})
+    },
+    changePage(num) {
+      this.currentPage = this.currentPage + num
+      this.getProducts()
     },
   },
   props: {
@@ -93,6 +130,7 @@ export default {
       resetForm,
       icons: {
         mdiAlertOutline,
+        mdiMagnify,
         mdiCloudUploadOutline,
       },
     }

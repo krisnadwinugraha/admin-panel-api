@@ -43,4 +43,12 @@ class BlogController extends Controller
             'message'=>'Blog Deleted Successfully!!'
         ]);
     }
+    
+    public function search(Request $request)
+    {
+        $blogs = Blog::where('title', 'like', '%' . $request->keywords . '%')
+        ->orWhere('category', 'like', '%' . $request->keywords . '%')
+        ->orWhere('content', 'like', '%' . $request->keywords . '%')->paginate(5);
+        return response()->json($blogs); 
+    }
 }

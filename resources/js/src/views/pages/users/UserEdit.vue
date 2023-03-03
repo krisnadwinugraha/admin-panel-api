@@ -1,23 +1,16 @@
 <template>
   <v-card flat class="mt-5">
-    <v-form @submit="create">
+    <v-form @submit.prevent="update">
       <div class="px-3">
         <v-card-text class="pt-5">
           <v-row>
             <v-col cols="12" sm="8" md="6">
-              <h2 class="mb-5">Create User</h2>
+              <h2 class="mb-5">Edit Product</h2>
               <!-- Name -->
-              <v-text-field v-model="user.name" :type="'text'" label="Name" outlined dense></v-text-field>
+              <v-text-field v-model="user.name" :type="'text'" label="name" outlined dense></v-text-field>
 
               <!-- Email -->
-              <v-text-field
-                v-model="user.email"
-                :type="'email'"
-                label="Email"
-                outlined
-                dense
-                persistent-hint
-              ></v-text-field>
+              <v-text-field v-model="user.email" :type="'email'" label="email" outlined dense></v-text-field>
 
               <!-- Password -->
               <v-text-field
@@ -62,7 +55,6 @@ import { ref } from '@vue/composition-api'
 import axios from 'axios'
 
 export default {
-  name: 'add-user',
   data() {
     return {
       user: {
@@ -72,13 +64,27 @@ export default {
       },
     }
   },
+  mounted() {
+    this.showProduct()
+  },
   methods: {
-    async create() {
+    async showProduct() {
       await axios
-        .post('/api/users', this.user)
+        .get(`/api/users/${this.$route.params.id}`)
         .then(response => {
-          console.log('ss')
-
+          const { name, email, password } = response.data
+          this.user.name = name
+          this.user.email = email
+          this.user.password = password
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    async update() {
+      await axios
+        .patch(`/api/users/${this.$route.params.id}`, this.user)
+        .then(response => {
           this.$router.push({ name: 'pages-users' })
         })
         .catch(error => {
@@ -87,10 +93,7 @@ export default {
     },
   },
   setup() {
-    const isPasswordVisible = ref(false)
-
     return {
-      isPasswordVisible,
       icons: {
         mdiKeyOutline,
         mdiLockOpenOutline,

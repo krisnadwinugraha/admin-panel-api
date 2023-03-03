@@ -8,7 +8,6 @@ import store from './store'
 import Auth from './Auth.js'
 
 Vue.prototype.auth = Auth
-
 Vue.config.productionTip = false
 
 new Vue({

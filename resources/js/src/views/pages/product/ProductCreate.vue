@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="mt-5">
-    <v-form @submit.prevent="create">
+    <v-form @submit="create">
       <div class="px-3">
         <v-card-text class="pt-5">
           <v-row>
@@ -61,7 +61,6 @@ export default {
         .post('/api/products', this.product)
         .then(response => {
           this.$router.push({ name: 'pages-products' })
-          console.log(success)
         })
         .catch(error => {
           console.log(error)
