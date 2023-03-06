@@ -51,4 +51,10 @@ class CategoryController extends Controller
         ->orWhere('deskripsi', 'like', '%' . $request->keywords . '%')->paginate(5);
         return response()->json($categories); 
     }
+
+    public function getAllCategories()
+    {
+        $categories = Category::all();
+        return response()->json($categories);
+    }
 }

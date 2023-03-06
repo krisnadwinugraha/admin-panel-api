@@ -10,8 +10,15 @@
               <v-text-field v-model="blog.title" :type="'text'" label="Title" outlined dense></v-text-field>
 
               <!-- Category -->
-              <v-text-field v-model="blog.category" :type="'text'" label="Category" outlined dense></v-text-field>
 
+              <v-select
+                :items="categories"
+                v-model="blog.category_id"
+                name="category_id"
+                item-value="id"
+                item-text="name"
+                label="Select a category"
+              />
               <!-- Content -->
               <v-text-field v-model="blog.content" :type="'text'" label="Content" outlined dense></v-text-field>
             </v-col>
@@ -48,14 +55,29 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      categories: [],
       blog: {
         title: '',
-        category: '',
+        category_id: '',
         content: '',
       },
     }
   },
+  mounted() {
+    this.getCategories()
+  },
   methods: {
+    async getCategories() {
+      await axios
+        .get(`/api/get-all-categories`)
+        .then(response => {
+          this.categories = response.data
+        })
+        .catch(error => {
+          console.log(error)
+          this.categories = []
+        })
+    },
     async create() {
       await axios
         .post('/api/blogs', this.blog)

@@ -10,8 +10,15 @@
               <v-text-field v-model="blog.title" :type="'text'" label="Title" outlined dense></v-text-field>
 
               <!-- Category -->
-              <v-text-field v-model="blog.category" :type="'text'" label="Category" outlined dense></v-text-field>
 
+              <v-select
+                :items="categories"
+                v-model="blog.category_id"
+                name="category_id"
+                item-value="id"
+                item-text="name"
+                label="Select a category"
+              />
               <!-- Content -->
               <v-text-field v-model="blog.content" :type="'text'" label="Content" outlined dense></v-text-field>
             </v-col>
@@ -49,23 +56,36 @@ export default {
   data() {
     return {
       blog: {
+        categories: [],
         title: '',
-        category: '',
+        category_id: '',
         content: '',
       },
     }
   },
   mounted() {
+    this.getCategories()
     this.showBlog()
   },
   methods: {
+    async getCategories() {
+      await axios
+        .get(`/api/get-all-categories`)
+        .then(response => {
+          this.categories = response.data
+        })
+        .catch(error => {
+          console.log(error)
+          this.categories = []
+        })
+    },
     async showBlog() {
       await axios
         .get(`/api/blogs/${this.$route.params.id}`)
         .then(response => {
-          const { title, category, content } = response.data
+          const { title, category_id, content } = response.data
           this.blog.title = title
-          this.blog.category = category
+          this.blog.category_id = category_id
           this.blog.content = content
         })
         .catch(error => {

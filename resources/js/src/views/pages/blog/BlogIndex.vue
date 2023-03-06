@@ -27,7 +27,7 @@
           <tr v-for="blog in blogs" :key="blog.title">
             <td>{{ blog.title }}</td>
             <td>
-              {{ blog.category }}
+              {{ blog.category_id.name }}
             </td>
             <td>
               {{ blog.content }}

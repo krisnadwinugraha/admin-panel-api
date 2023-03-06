@@ -19,6 +19,9 @@ use App\Http\Controllers\AuthController;
 |
 */
 
+Route::get('get-all-categories', [CategoryController::class, 'getAllCategories']);
+
+
 Route::prefix('auth')->group(function(){
     Route::post('login',[AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);

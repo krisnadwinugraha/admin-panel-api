@@ -9,7 +9,7 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::paginate(5);
+        $blogs = Blog::with('categoryId')->latest()->paginate(5);
         return response()->json($blogs);
     }
 

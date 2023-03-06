@@ -16,37 +16,37 @@ class BlogSeeder extends Seeder
     {
         Blog::create([
             'title' => 'Judul Blog 1',
-            'category' => '1',
+            'category_id' => '1',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
             'title' => 'Judul Blog 2',
-            'category' => '2',
+            'category_id' => '2',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
             'title' => 'Judul Blog 3',
-            'category' => '3',
+            'category_id' => '3',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
             'title' => 'Judul Blog 4',
-            'category' => '2',
+            'category_id' => '2',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
             'title' => 'Judul Blog 5',
-            'category' => '1',
+            'category_id' => '1',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
             'title' => 'Judul Blog 6',
-            'category' => '2',
+            'category_id' => '2',
             'content' => 'Lorem ipsum dolor sit',
         ]);
     }
