@@ -15,6 +15,10 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $imageName = time().'.'.$request->file('image')->getClientOriginalExtension();
+        $request->image->move(public_path('/images/avatars'), $imageName);
+
+        $request['image'] = $imageName;
         $product = Product::create($request->post());
         return response()->json([
             'message'=>'Product Created Successfully!!',
@@ -29,6 +33,12 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        if($request->file('image')){
+            $imageName = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->image->move(public_path('/images/avatars'), $imageName);
+            $request['image'] = $imageName;
+        }
+        
         $product->fill($request->post())->save();
         return response()->json([
             'message'=>'Product Updated Successfully!!',

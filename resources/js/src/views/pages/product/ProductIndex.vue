@@ -20,6 +20,7 @@
             <th class="text-uppercase">Name</th>
             <th class="text-uppercase">Deskripsi</th>
             <th class="text-uppercase">Harga</th>
+            <th class="text-uppercase">Image</th>
             <th class="text-uppercase">Action</th>
           </tr>
         </thead>
@@ -31,6 +32,16 @@
             </td>
             <td>
               {{ product.harga }}
+            </td>
+            <td>
+              <v-img
+                v-if="product.image"
+                class="white--text align-end"
+                :src="'/images/avatars/' + product.image"
+                height="100"
+                width="100"
+                alt=""
+              />
             </td>
             <td>
               <router-link :to="{ name: 'product-edit', params: { id: product.id } }" class="btn btn-success"

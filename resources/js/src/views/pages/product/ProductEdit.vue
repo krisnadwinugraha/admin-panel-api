@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="mt-5">
-    <v-form @submit.prevent="update">
+    <v-form @submit.prevent="formSubmit" enctype="multipart/form-data">
       <div class="px-3">
         <v-card-text class="pt-5">
           <v-row>
@@ -14,6 +14,9 @@
 
               <!-- Harga -->
               <v-text-field v-model="product.harga" :type="'text'" label="harga" outlined dense></v-text-field>
+
+              <!-- Image -->
+              <input type="file" class="form-control" v-on:change="onImageChange" />
             </v-col>
 
             <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">
@@ -32,7 +35,7 @@
         <!-- action buttons -->
         <v-card-text>
           <v-btn color="primary" type="submit" class="me-3 mt-3"> Save changes </v-btn>
-          <v-btn color="secondary" outlined class="mt-3"> Cancel </v-btn>
+          <v-btn color="secondary" @click.prevent="cancel" outlined class="mt-3"> Cancel </v-btn>
         </v-card-text>
       </div>
     </v-form>
@@ -52,6 +55,7 @@ export default {
         name: '',
         deskripsi: '',
         harga: '',
+        image: '',
       },
     }
   },
@@ -59,28 +63,49 @@ export default {
     this.showProduct()
   },
   methods: {
+    onImageChange(e) {
+      this.product.image = e.target.files[0]
+    },
     async showProduct() {
       await axios
         .get(`/api/products/${this.$route.params.id}`)
         .then(response => {
-          const { name, deskripsi, harga } = response.data
+          const { name, deskripsi, harga, image } = response.data
           this.product.name = name
           this.product.deskripsi = deskripsi
           this.product.harga = harga
+          this.product.image = image
         })
         .catch(error => {
           console.log(error)
         })
     },
-    async update() {
-      await axios
-        .patch(`/api/products/${this.$route.params.id}`, this.product)
+    formSubmit(e) {
+      e.preventDefault()
+      let currentObj = this
+
+      const config = {
+        headers: { 'content-type': 'multipart/form-data' },
+      }
+
+      let formData = new FormData()
+      formData.append('name', this.product.name)
+      formData.append('deskripsi', this.product.deskripsi)
+      formData.append('harga', this.product.harga)
+      formData.append('image', this.product.image)
+      formData.append('_method', 'PATCH')
+
+      axios
+        .post(`/api/products/${this.$route.params.id}`, formData, config)
         .then(response => {
           this.$router.push({ name: 'pages-products' })
         })
-        .catch(error => {
-          console.log(error)
+        .catch(function (error) {
+          currentObj.output = error
         })
+    },
+    cancel() {
+      this.$router.push({ name: 'pages-products' })
     },
   },
   setup() {

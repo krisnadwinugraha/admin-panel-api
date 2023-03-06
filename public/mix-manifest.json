@@ -1,12 +1,16 @@
 {
     "/js/app.js": "/js/app.js",
     "/images/1.png": "/images/1.png",
+    "/images/1678075459.png": "/images/1678075459.png",
+    "/images/1678075491.jpg": "/images/1678075491.jpg",
     "/images/2.png": "/images/2.png",
     "/images/3d-characters/error.png": "/images/3d-characters/error.png",
     "/images/3d-characters/pose-m-1.png": "/images/3d-characters/pose-m-1.png",
     "/images/amazon-web-services-logo.png": "/images/amazon-web-services-logo.png",
     "/images/american-bank.png": "/images/american-bank.png",
     "/images/avatars/1.png": "/images/avatars/1.png",
+    "/images/avatars/1678075459.png": "/images/avatars/1678075459.png",
+    "/images/avatars/1678075491.jpg": "/images/avatars/1678075491.jpg",
     "/images/avatars/2.png": "/images/avatars/2.png",
     "/images/avatars/pizza.jpg": "/images/avatars/pizza.jpg",
     "/images/aviato.png": "/images/aviato.png",
@@ -77,5 +81,12 @@
     "/images/trophy.png": "/images/trophy.png",
     "/images/upgrade-banner-dark.png": "/images/upgrade-banner-dark.png",
     "/images/upgrade-banner-light.png": "/images/upgrade-banner-light.png",
-    "/images/zipcar.png": "/images/zipcar.png"
+    "/images/zipcar.png": "/images/zipcar.png",
+    "/images/avatars/1678085431.jpg": "/images/avatars/1678085431.jpg",
+    "/images/avatars/1678085448.jpg": "/images/avatars/1678085448.jpg",
+    "/images/avatars/1678089280.jpg": "/images/avatars/1678089280.jpg",
+    "/images/avatars/1678089511.jpg": "/images/avatars/1678089511.jpg",
+    "/images/avatars/1678089512.jpg": "/images/avatars/1678089512.jpg",
+    "/images/avatars/1678089552.jpg": "/images/avatars/1678089552.jpg",
+    "/images/avatars/1678089677.jpg": "/images/avatars/1678089677.jpg"
 }

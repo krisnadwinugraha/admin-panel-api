@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="mt-5">
-    <v-form @submit="create">
+    <v-form @submit="formSubmit" enctype="multipart/form-data">
       <div class="px-3">
         <v-card-text class="pt-5">
           <v-row>
@@ -14,6 +14,9 @@
 
               <!-- Harga -->
               <v-text-field v-model="product.harga" :type="'number'" label="Harga" outlined dense></v-text-field>
+
+              <!-- Image -->
+              <input type="file" class="form-control" v-on:change="onImageChange" />
             </v-col>
 
             <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">
@@ -32,7 +35,7 @@
         <!-- action buttons -->
         <v-card-text>
           <v-btn color="primary" type="submit" class="me-3 mt-3"> Save changes </v-btn>
-          <v-btn color="secondary" outlined class="mt-3"> Cancel </v-btn>
+          <v-btn color="secondary" @click="cancel" outlined class="mt-3"> Cancel </v-btn>
         </v-card-text>
       </div>
     </v-form>
@@ -52,19 +55,39 @@ export default {
         name: '',
         deskripsi: '',
         harga: '',
+        image: '',
       },
     }
   },
   methods: {
-    async create() {
-      await axios
-        .post('/api/products', this.product)
+    onImageChange(e) {
+      this.product.image = e.target.files[0]
+    },
+    formSubmit(e) {
+      e.preventDefault()
+      let currentObj = this
+
+      const config = {
+        headers: { 'content-type': 'multipart/form-data' },
+      }
+      console.log(this.product.image)
+
+      let formData = new FormData()
+      formData.append('name', this.product.name)
+      formData.append('deskripsi', this.product.deskripsi)
+      formData.append('harga', this.product.harga)
+      formData.append('image', this.product.image)
+      axios
+        .post('/api/products', formData, config)
         .then(response => {
           this.$router.push({ name: 'pages-products' })
         })
-        .catch(error => {
-          console.log(error)
+        .catch(function (error) {
+          currentObj.output = error
         })
+    },
+    cancel() {
+      this.$router.replace({ name: 'pages-products' }).catch(() => {})
     },
   },
   setup() {
