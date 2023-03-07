@@ -17,22 +17,40 @@
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-uppercase">Name</th>
-            <th class="text-uppercase">Deskripsi</th>
+            <th class="text-uppercase">Nama</th>
+            <th class="text-uppercase">Product</th>
+            <th class="text-uppercase">Harga Product</th>
+            <th class="text-uppercase">QTY</th>
+            <th class="text-uppercase">Total Harga</th>
+            <th class="text-uppercase">Status</th>
             <th class="text-uppercase">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="category in categories" :key="category.name">
-            <td>{{ category.name }}</td>
+          <tr v-for="transaction in transactions" :key="transaction.title">
+            <td>{{ transaction.nama }}</td>
             <td>
-              {{ category.deskripsi }}
+              {{ transaction.product_id.name }}
             </td>
             <td>
-              <router-link :to="{ name: 'category-edit', params: { id: category.id } }" class="btn btn-success"
+              {{ transaction.product_id.harga }}
+            </td>
+            <td>
+              {{ transaction.qty }}
+            </td>
+            <td>
+              {{ transaction.product_id.harga * transaction.qty }}
+            </td>
+            <td>
+              {{ transaction.status }}
+            </td>
+            <td>
+              <router-link :to="{ name: 'transaction-edit', params: { id: transaction.id } }" class="btn btn-success"
                 ><v-btn color="primary" class="me-3"> Edit </v-btn></router-link
               >
-              <v-btn color="danger" outlined @click="deleteCategory(category.id)" class="btn btn-danger">Delete</v-btn>
+              <v-btn color="danger" outlined @click="deleteTransaction(transaction.id)" class="btn btn-danger"
+                >Delete</v-btn
+              >
             </td>
           </tr>
         </tbody>
@@ -52,10 +70,10 @@ import { ref } from '@vue/composition-api'
 import axios from 'axios'
 
 export default {
-  name: 'categories',
+  name: 'transactions',
   data() {
     return {
-      categories: [],
+      transactions: [],
       keywords: null,
       lastPage: '',
       currentPage: 1,
@@ -67,27 +85,27 @@ export default {
     },
   },
   mounted() {
-    this.getCategories()
+    this.getTransactions()
   },
   methods: {
-    async getCategories() {
+    async getTransactions() {
       await axios
-        .get(`/api/categories?page=${this.currentPage}`)
+        .get(`/api/transactions`)
         .then(response => {
-          this.categories = response.data.data
+          this.transactions = response.data.data
           this.lastPage = response.data.last_page
         })
         .catch(error => {
           console.log(error)
-          this.categories = []
+          this.transactions = []
         })
     },
-    deleteCategory(id) {
-      if (confirm('Are you sure to delete this category ?')) {
+    deleteTransaction(id) {
+      if (confirm('Are you sure to delete this transaction ?')) {
         axios
-          .delete(`/api/categories/${id}`)
+          .delete(`/api/transactions/${id}`)
           .then(response => {
-            this.getCategories()
+            this.getTransactions()
           })
           .catch(error => {
             console.log(error)
@@ -96,21 +114,21 @@ export default {
     },
     fetch() {
       axios
-        .get('/category-search', { params: { keywords: this.keywords } })
-        .then(response => (this.categories = response.data.data))
+        .get('/transaction-search', { params: { keywords: this.keywords } })
+        .then(response => (this.transactions = response.data.data))
         .catch(error => {})
     },
     changePage(num) {
       this.currentPage = this.currentPage + num
-      this.getCategories()
+      this.getTransactions()
     },
   },
-  setup() {
+  setup(props) {
     return {
       icons: {
         mdiAlertOutline,
-        mdiCloudUploadOutline,
         mdiMagnify,
+        mdiCloudUploadOutline,
       },
     }
   },

@@ -61,4 +61,10 @@ class ProductController extends Controller
         ->orWhere('harga', 'like', '%' . $request->keywords . '%')->paginate(5);
         return response()->json($products); 
     }
+
+    public function getAllProducts()
+    {
+        $products = Product::all();
+        return response()->json($products);
+    }
 }

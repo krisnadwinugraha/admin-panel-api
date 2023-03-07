@@ -109,26 +109,8 @@ export default {
       this.getBlogs()
     },
   },
-  props: {
-    indexData: {
-      type: Object,
-      default: () => {},
-    },
-  },
-
-  setup(props) {
-    const status = ['Active', 'Inactive', 'Pending', 'Closed']
-
-    const indexDataLocale = ref(JSON.parse(JSON.stringify(props.indexData)))
-
-    const resetForm = () => {
-      indexDataLocale.value = JSON.parse(JSON.stringify(props.indexData))
-    }
-
+  setup() {
     return {
-      status,
-      indexDataLocale,
-      resetForm,
       icons: {
         mdiAlertOutline,
         mdiMagnify,

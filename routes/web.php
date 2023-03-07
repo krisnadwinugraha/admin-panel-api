@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ Route::get('product-search', [ProductController::class, 'search']);
 Route::get('blog-search', [BlogController::class, 'search']);
 Route::get('category-search', [CategoryController::class, 'search']);
 Route::get('user-search', [UserController::class, 'search']);
+Route::get('transaction-search', [TransactionController::class, 'search']);
 
 Route::get('/{any}', [ApplicationController::class, 'index'])->where('any', '.*');
 

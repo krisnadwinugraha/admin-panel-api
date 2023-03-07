@@ -146,6 +146,14 @@ const routes = [
     },
   },
   {
+    path: '/pages/transactions',
+    name: 'pages-transactions',
+    component: () => import('@/views/pages/transaction/Transaction.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/login',
     name: 'pages-login',
     component: () => import('@/views/pages/Login.vue'),

@@ -48,6 +48,11 @@
         :icon="icons.mdiClipboardOutline"
       ></nav-menu-link>
       <nav-menu-link title="Product" :to="{ name: 'pages-products' }" :icon="icons.mdiDiamondOutline"></nav-menu-link>
+      <nav-menu-link
+        title="Transaction"
+        :to="{ name: 'pages-transactions' }"
+        :icon="icons.mdiDiamondOutline"
+      ></nav-menu-link>
 
       <nav-menu-section-title title="USER MANAGEMENT"></nav-menu-section-title>
       <nav-menu-link title="User" :to="{ name: 'pages-users' }" :icon="icons.mdiAccountOutline"></nav-menu-link>
