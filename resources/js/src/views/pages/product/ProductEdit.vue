@@ -16,7 +16,14 @@
               <v-text-field v-model="product.harga" :type="'text'" label="harga" outlined dense></v-text-field>
 
               <!-- Image -->
-              <input type="file" class="form-control" v-on:change="onImageChange" />
+              <v-file-input
+                v-model="product.image"
+                label="Image"
+                variant="filled"
+                v-on:change="onImageChange"
+                outlined
+                dense
+              ></v-file-input>
             </v-col>
 
             <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">
