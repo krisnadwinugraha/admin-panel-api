@@ -47,9 +47,10 @@ class TransactionController extends Controller
     
     public function search(Request $request)
     {
-        $blogs = Transaction::where('title', 'like', '%' . $request->keywords . '%')
-        ->orWhere('category', 'like', '%' . $request->keywords . '%')
-        ->orWhere('content', 'like', '%' . $request->keywords . '%')->paginate(5);
+        $blogs = Transaction::with('productId')->where('nama', 'like', '%' . $request->keywords . '%')
+        ->orWhere('product_id', 'like', '%' . $request->keywords . '%')
+        ->orWhere('status', 'like', '%' . $request->keywords . '%')
+        ->orWhere('qty', 'like', '%' . $request->keywords . '%')->paginate(5);
         return response()->json($blogs); 
     }
 }

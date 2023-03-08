@@ -48,11 +48,11 @@
         :icon="icons.mdiClipboardOutline"
       ></nav-menu-link>
       <nav-menu-link title="Product" :to="{ name: 'pages-products' }" :icon="icons.mdiDiamondOutline"></nav-menu-link>
-      <nav-menu-link
-        title="Transaction"
-        :to="{ name: 'pages-transactions' }"
-        :icon="icons.mdiDiamondOutline"
-      ></nav-menu-link>
+
+      <nav-menu-group title="Transaction" :icon="icons.mdiAccountCashOutline">
+        <nav-menu-link title="Index" :to="{ name: 'pages-transactions' }"></nav-menu-link>
+        <nav-menu-link title="Create" :to="{ name: 'pages-transactions-create' }"></nav-menu-link>
+      </nav-menu-group>
 
       <nav-menu-section-title title="USER MANAGEMENT"></nav-menu-section-title>
       <nav-menu-link title="User" :to="{ name: 'pages-users' }" :icon="icons.mdiAccountOutline"></nav-menu-link>
@@ -94,6 +94,7 @@ import {
   mdiAccountOutline,
   mdiAccountAlertOutline,
   mdiDiamondOutline,
+  mdiAccountCashOutline,
   mdiClipboardOutline,
   mdiFileMultipleOutline,
   mdiAccountBoxMultipleOutline,
@@ -128,6 +129,7 @@ export default {
         mdiAccountOutline,
         mdiAccountAlertOutline,
         mdiDiamondOutline,
+        mdiAccountCashOutline,
         mdiClipboardOutline,
         mdiFileMultipleOutline,
         mdiAccountBoxMultipleOutline,

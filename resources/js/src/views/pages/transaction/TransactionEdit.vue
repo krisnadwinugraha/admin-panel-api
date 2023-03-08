@@ -5,22 +5,26 @@
         <v-card-text class="pt-5">
           <v-row>
             <v-col cols="12" sm="8" md="6">
-              <h2 class="mb-5">Edit Blog</h2>
-              <!-- Title -->
-              <v-text-field v-model="blog.title" :type="'text'" label="Title" outlined dense></v-text-field>
+              <h2 class="mb-5">Edit Transaction</h2>
+              <!-- Nama -->
+              <v-text-field v-model="transaction.nama" :type="'text'" label="Nama" outlined dense></v-text-field>
 
               <!-- Category -->
 
               <v-select
-                :items="categories"
-                v-model="blog.category_id"
-                name="category_id"
+                :items="products"
+                v-model="transaction.product_id"
+                name="product_id"
                 item-value="id"
                 item-text="name"
-                label="Select a category"
+                label="Select a product"
+                outlined
               />
-              <!-- Content -->
-              <v-text-field v-model="blog.content" :type="'text'" label="Content" outlined dense></v-text-field>
+              <!-- Qty -->
+              <v-text-field v-model="transaction.qty" :type="'text'" label="Qty" outlined dense></v-text-field>
+
+              <!-- Status -->
+              <v-select :items="status" v-model="transaction.status" name="status" label="Select a status" outlined />
             </v-col>
 
             <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">
@@ -55,38 +59,40 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      blog: {
-        categories: [],
-        title: '',
-        category_id: '',
-        content: '',
+      transaction: {
+        transactions: [],
+        nama: '',
+        product_id: '',
+        qty: '',
       },
+      status: ['Belum', 'Dibayar', 'Pending'],
     }
   },
   mounted() {
-    this.getCategories()
-    this.showBlog()
+    this.getProducts()
+    this.showTransaction()
   },
   methods: {
-    async getCategories() {
+    async getProducts() {
       await axios
-        .get(`/api/get-all-categories`)
+        .get(`/api/get-all-products`)
         .then(response => {
-          this.categories = response.data
+          this.products = response.data
         })
         .catch(error => {
           console.log(error)
-          this.categories = []
+          this.products = []
         })
     },
-    async showBlog() {
+    async showTransaction() {
       await axios
-        .get(`/api/blogs/${this.$route.params.id}`)
+        .get(`/api/transactions/${this.$route.params.id}`)
         .then(response => {
-          const { title, category_id, content } = response.data
-          this.blog.title = title
-          this.blog.category_id = category_id
-          this.blog.content = content
+          const { nama, product_id, qty, status } = response.data
+          this.transaction.nama = nama
+          this.transaction.product_id = product_id
+          this.transaction.qty = qty
+          this.transaction.status = status
         })
         .catch(error => {
           console.log(error)
@@ -94,16 +100,16 @@ export default {
     },
     async update() {
       await axios
-        .patch(`/api/blogs/${this.$route.params.id}`, this.blog)
+        .patch(`/api/transactions/${this.$route.params.id}`, this.transaction)
         .then(response => {
-          this.$router.push({ name: 'pages-blogs' })
+          this.$router.push({ name: 'pages-transactions' })
         })
         .catch(error => {
           console.log(error)
         })
     },
     cancel() {
-      this.$router.push({ name: 'pages-blogs' })
+      this.$router.push({ name: 'pages-transactions' })
     },
   },
   setup() {

@@ -1,26 +1,30 @@
 <template>
   <v-card flat class="mt-5">
-    <v-form @submit="create">
+    <v-form @submit.prevent="create">
       <div class="px-3">
         <v-card-text class="pt-5">
           <v-row>
             <v-col cols="12" sm="8" md="6">
-              <h2 class="mb-5">Create Blog</h2>
-              <!-- Title -->
-              <v-text-field v-model="blog.title" :type="'text'" label="Title" outlined dense></v-text-field>
+              <h2 class="mb-5">Create Transaction</h2>
+              <!-- Nama -->
+              <v-text-field v-model="transaction.nama" :type="'text'" label="Nama" outlined dense></v-text-field>
 
-              <!-- Category -->
+              <!-- Products -->
 
               <v-select
-                :items="categories"
-                v-model="blog.category_id"
-                name="category_id"
+                :items="products"
+                v-model="transaction.product_id"
+                name="product_id"
                 item-value="id"
                 item-text="name"
-                label="Select a category"
+                label="Select a product"
+                outlined
               />
-              <!-- Content -->
-              <v-text-field v-model="blog.content" :type="'text'" label="Content" outlined dense></v-text-field>
+              <!-- Qty -->
+              <v-text-field v-model="transaction.qty" :type="'text'" label="Qty" outlined dense></v-text-field>
+
+              <!-- Status -->
+              <v-select :items="status" v-model="transaction.status" name="status" label="Select a status" outlined />
             </v-col>
 
             <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">
@@ -55,34 +59,36 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      categories: [],
-      blog: {
-        title: '',
-        category_id: '',
-        content: '',
+      products: [],
+      status: ['Belum', 'Dibayar', 'Pending'],
+      transaction: {
+        nama: '',
+        product_id: '',
+        qty: '',
+        status: '',
       },
     }
   },
   mounted() {
-    this.getCategories()
+    this.getProducts()
   },
   methods: {
-    async getCategories() {
+    async getProducts() {
       await axios
-        .get(`/api/get-all-categories`)
+        .get(`/api/get-all-products`)
         .then(response => {
-          this.categories = response.data
+          this.products = response.data
         })
         .catch(error => {
           console.log(error)
-          this.categories = []
+          this.products = []
         })
     },
     async create() {
       await axios
-        .post('/api/blogs', this.blog)
+        .post('/api/transactions', this.transaction)
         .then(response => {
-          this.$router.push({ name: 'pages-blogs' })
+          this.$router.push({ name: 'pages-transactions' })
         })
         .catch(error => {
           console.log(error)

@@ -18,6 +18,7 @@
                 item-value="id"
                 item-text="name"
                 label="Select a category"
+                outlined
               />
               <!-- Content -->
               <v-text-field v-model="blog.content" :type="'text'" label="Content" outlined dense></v-text-field>

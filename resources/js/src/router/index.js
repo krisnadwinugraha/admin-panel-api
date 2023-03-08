@@ -154,6 +154,22 @@ const routes = [
     },
   },
   {
+    path: '/pages/transactions-create',
+    name: 'pages-transactions-create',
+    component: () => import('@/views/pages/transaction/TransactionCreate.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/pages/transactions/:id/edit',
+    name: 'transaction-edit',
+    component: () => import('@/views/pages/transaction/TransactionEdit.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/login',
     name: 'pages-login',
     component: () => import('@/views/pages/Login.vue'),
