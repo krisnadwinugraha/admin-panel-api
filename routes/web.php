@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +23,10 @@ Route::get('blog-search', [BlogController::class, 'search']);
 Route::get('category-search', [CategoryController::class, 'search']);
 Route::get('user-search', [UserController::class, 'search']);
 Route::get('transaction-search', [TransactionController::class, 'search']);
+Route::get('report-search', [ReportController::class, 'search']);
+
+Route::get('/print-pdf',[ReportController::class, 'print_pdf']);
+Route::get('/export-excel',[ReportController::class, 'export_excel']);
 
 Route::get('/{any}', [ApplicationController::class, 'index'])->where('any', '.*');
 
