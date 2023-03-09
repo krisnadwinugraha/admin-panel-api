@@ -15,7 +15,7 @@
           </v-avatar>
         </v-badge>
         <div class="d-inline-flex flex-column justify-center ms-3" style="vertical-align: middle">
-          <span class="text--primary font-weight-semibold mb-n1"> John Doe </span>
+          <span class="text--primary font-weight-semibold mb-n1"> {{ profile.name }} </span>
           <small class="text--disabled text-capitalize">Admin</small>
         </div>
       </div>
@@ -134,11 +134,25 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      profile: [],
       loggedUser: this.auth.user,
     }
   },
-  mounted() {},
+  mounted() {
+    this.getProfile()
+  },
   methods: {
+    async getProfile() {
+      await axios
+        .get(`/api/auth/profile`)
+        .then(response => {
+          this.profile = response.data.data
+        })
+        .catch(error => {
+          console.log(error)
+          this.profile = []
+        })
+    },
     logout() {
       axios
         .post('http://127.0.0.1:8000/api/auth/logout')
