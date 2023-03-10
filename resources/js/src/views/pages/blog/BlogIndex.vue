@@ -29,7 +29,7 @@
             <td>
               {{ blog.category_id.name }}
             </td>
-            <td width="30%">
+            <td width="50%">
               {{ blog.content }}
             </td>
             <td>

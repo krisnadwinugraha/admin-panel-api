@@ -10,7 +10,6 @@
               <v-text-field v-model="transaction.nama" :type="'text'" label="Nama" outlined dense></v-text-field>
 
               <!-- Products -->
-
               <v-select
                 :items="products"
                 v-model="transaction.product_id"
@@ -21,6 +20,7 @@
                 outlined
                 dense
               />
+
               <!-- Qty -->
               <v-text-field v-model="transaction.qty" :type="'text'" label="Qty" outlined dense></v-text-field>
 

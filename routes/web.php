@@ -7,6 +7,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TransactionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,8 @@ Route::get('category-search', [CategoryController::class, 'search']);
 Route::get('user-search', [UserController::class, 'search']);
 Route::get('transaction-search', [TransactionController::class, 'search']);
 Route::get('report-search', [ReportController::class, 'search']);
+
+Route::get('transaction-filter', [TransactionController::class, 'filter']);
 
 Route::get('/print-pdf',[ReportController::class, 'print_pdf']);
 Route::get('/export-excel',[ReportController::class, 'export_excel']);

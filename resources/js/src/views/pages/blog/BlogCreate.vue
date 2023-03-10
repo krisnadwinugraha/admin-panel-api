@@ -10,7 +10,6 @@
               <v-text-field v-model="blog.title" :type="'text'" label="Title" outlined dense></v-text-field>
 
               <!-- Category -->
-
               <v-select
                 :items="categories"
                 v-model="blog.category_id"
@@ -21,6 +20,7 @@
                 outlined
                 dense
               />
+
               <!-- Content -->
               <v-text-field v-model="blog.content" :type="'text'" label="Content" outlined dense></v-text-field>
             </v-col>

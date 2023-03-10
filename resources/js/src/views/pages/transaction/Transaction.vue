@@ -2,7 +2,22 @@
   <v-card id="report-card" class="py-5 px-5">
     <v-card flat class="my-5 mx-5">
       <h1>Transaksi</h1>
-      <div class="d-flex align-center mx-6 my-5">
+      <div class="d-flex align-center me-6 my-5">
+        <!-- Products -->
+        <v-select
+          :items="products"
+          v-model="filters"
+          name="product_id"
+          item-value="id"
+          item-text="name"
+          label="Filter Product"
+          class="me-5"
+          outlined
+          rounded
+          dense
+          hide-details
+        />
+
         <v-spacer></v-spacer>
         <v-text-field
           rounded
@@ -77,7 +92,9 @@ export default {
   data() {
     return {
       transactions: [],
+      products: [],
       keywords: null,
+      filters: null,
       lastPage: '',
       currentPage: 1,
     }
@@ -86,14 +103,18 @@ export default {
     keywords(after, before) {
       this.fetch()
     },
+    filters(after, before) {
+      this.filter()
+    },
   },
   mounted() {
     this.getTransactions()
+    this.getProducts()
   },
   methods: {
     async getTransactions() {
       await axios
-        .get(`/api/transactions`)
+        .get(`/api/transactions?page=${this.currentPage}`)
         .then(response => {
           this.transactions = response.data.data
           this.lastPage = response.data.last_page
@@ -101,6 +122,17 @@ export default {
         .catch(error => {
           console.log(error)
           this.transactions = []
+        })
+    },
+    async getProducts() {
+      await axios
+        .get(`/api/get-all-products`)
+        .then(response => {
+          this.products = response.data
+        })
+        .catch(error => {
+          console.log(error)
+          this.products = []
         })
     },
     deleteTransaction(id) {
@@ -118,6 +150,12 @@ export default {
     fetch() {
       axios
         .get('/transaction-search', { params: { keywords: this.keywords } })
+        .then(response => (this.transactions = response.data.data))
+        .catch(error => {})
+    },
+    filter() {
+      axios
+        .get('/transaction-filter', { params: { filters: this.filters } })
         .then(response => (this.transactions = response.data.data))
         .catch(error => {})
     },

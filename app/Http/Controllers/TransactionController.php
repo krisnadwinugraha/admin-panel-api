@@ -9,8 +9,8 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $blogs = Transaction::with('productId')->latest()->paginate(5);
-        return response()->json($blogs);
+        $transactions = Transaction::with('productId')->latest()->paginate(5);
+        return response()->json($transactions);
     }
 
     public function store(Request $request)
@@ -46,10 +46,18 @@ class TransactionController extends Controller
     
     public function search(Request $request)
     {
-        $blogs = Transaction::with('productId')->where('nama', 'like', '%' . $request->keywords . '%')
+        $transactions = Transaction::with('productId')->where('nama', 'like', '%' . $request->keywords . '%')
         ->orWhere('product_id', 'like', '%' . $request->keywords . '%')
         ->orWhere('status', 'like', '%' . $request->keywords . '%')
         ->orWhere('qty', 'like', '%' . $request->keywords . '%')->paginate(5);
-        return response()->json($blogs); 
+        return response()->json($transactions); 
+    }
+
+    public function filter(Request $request)
+    {
+        $transactions = Transaction::with('productId')
+        ->orWhere('product_id', 'like', '%' . $request->filters . '%')
+        ->paginate(5);
+        return response()->json($transactions); 
     }
 }

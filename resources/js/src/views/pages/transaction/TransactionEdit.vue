@@ -10,7 +10,6 @@
               <v-text-field v-model="transaction.nama" :type="'text'" label="Nama" outlined dense></v-text-field>
 
               <!-- Category -->
-
               <v-select
                 :items="products"
                 v-model="transaction.product_id"
