@@ -19,12 +19,20 @@
                 item-text="name"
                 label="Select a product"
                 outlined
+                dense
               />
               <!-- Qty -->
               <v-text-field v-model="transaction.qty" :type="'text'" label="Qty" outlined dense></v-text-field>
 
               <!-- Status -->
-              <v-select :items="status" v-model="transaction.status" name="status" label="Select a status" outlined />
+              <v-select
+                :items="status"
+                v-model="transaction.status"
+                name="status"
+                label="Select a status"
+                outlined
+                dense
+              />
             </v-col>
 
             <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">

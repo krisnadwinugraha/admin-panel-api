@@ -19,6 +19,7 @@
                 item-text="name"
                 label="Select a category"
                 outlined
+                dense
               />
               <!-- Content -->
               <v-text-field v-model="blog.content" :type="'text'" label="Content" outlined dense></v-text-field>
