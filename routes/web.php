@@ -24,6 +24,7 @@ Route::get('product-search', [ProductController::class, 'search']);
 Route::get('blog-search', [BlogController::class, 'search']);
 Route::get('category-search', [CategoryController::class, 'search']);
 Route::get('user-search', [UserController::class, 'search']);
+Route::get('role-search', [RoleController::class, 'search']);
 Route::get('transaction-search', [TransactionController::class, 'search']);
 Route::get('report-search', [ReportController::class, 'search']);
 

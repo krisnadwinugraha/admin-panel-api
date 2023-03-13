@@ -65,10 +65,10 @@ export default {
     }
   },
   mounted() {
-    this.showProduct()
+    this.showUser()
   },
   methods: {
-    async showProduct() {
+    async showUser() {
       await axios
         .get(`/api/users/${this.$route.params.id}`)
         .then(response => {

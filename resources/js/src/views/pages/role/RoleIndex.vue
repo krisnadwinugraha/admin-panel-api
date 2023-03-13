@@ -1,81 +1,115 @@
 <template>
   <v-card flat class="my-5 mx-5">
+    <div class="d-flex align-center mx-6 my-5">
+      <v-spacer></v-spacer>
+      <v-text-field
+        rounded
+        dense
+        outlined
+        :prepend-inner-icon="icons.mdiMagnify"
+        class="app-bar-search flex-grow-0"
+        hide-details
+        type="'text'"
+        v-model="keywords"
+      ></v-text-field>
+    </div>
     <v-simple-table>
       <template v-slot:default>
         <thead>
           <tr>
             <th class="text-uppercase">Name</th>
-            <th class="text-uppercase">Role</th>
+            <th class="text-uppercase">Guard</th>
             <th class="text-uppercase">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
-            <td>{{ item.name }}</td>
+          <tr v-for="role in roles" :key="role.id">
+            <td>{{ role.name }}</td>
             <td>
-              {{ item.role }}
+              {{ role.guard_name }}
             </td>
             <td>
-              <v-btn color="primary" class="me-3"> Edit </v-btn>
-              <v-btn color="danger" outlined class="btn btn-sm"> Delete </v-btn>
+              <router-link :to="{ name: 'role-edit', params: { id: role.id } }" class="btn btn-success"
+                ><v-btn color="primary" class="me-3"> Edit </v-btn></router-link
+              >
+              <v-btn color="danger" outlined @click="deleteRole(role.id)" class="btn btn-danger">Delete</v-btn>
             </td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
+    <div class="d-flex align-center mx-6 my-5">
+      <v-spacer></v-spacer>
+      <v-btn color="primary" :disabled="currentPage === 1" @click="changePage(-1)">Prev</v-btn>
+      <v-btn color="primary" :disabled="currentPage === lastPage" @click="changePage(1)">Next >></v-btn>
+    </div>
   </v-card>
 </template>
 
 <script>
-import { mdiAlertOutline, mdiCloudUploadOutline } from '@mdi/js'
+import { mdiAlertOutline, mdiMagnify, mdiCloudUploadOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
+import axios from 'axios'
 
 export default {
-  props: {
-    indexData: {
-      type: Object,
-      default: () => {},
+  data() {
+    return {
+      roles: [],
+      keywords: null,
+      lastPage: '',
+      currentPage: 1,
+    }
+  },
+  watch: {
+    keywords(after, before) {
+      this.fetch()
     },
   },
-  setup(props) {
-    const status = ['Active', 'Inactive', 'Pending', 'Closed']
-
-    const desserts = [
-      {
-        name: 'User 1',
-        role: 'user',
-      },
-      {
-        name: 'User 2',
-        role: 'user',
-      },
-      {
-        name: 'User 3',
-        role: 'user',
-      },
-      {
-        name: 'User 4',
-        role: 'user',
-      },
-      {
-        name: 'User 5',
-        role: 'user',
-      },
-    ]
-
-    const indexDataLocale = ref(JSON.parse(JSON.stringify(props.indexData)))
-
-    const resetForm = () => {
-      indexDataLocale.value = JSON.parse(JSON.stringify(props.indexData))
-    }
-
+  mounted() {
+    this.getRole()
+  },
+  methods: {
+    async getRole() {
+      await axios
+        .get(`/api/roles?page=${this.currentPage}`)
+        .then(response => {
+          this.roles = response.data.data
+          this.lastPage = response.data.last_page
+          console.log(this.roles)
+        })
+        .catch(error => {
+          console.log(error)
+          this.roles = []
+        })
+    },
+    deleteProduct(id) {
+      if (confirm('Are you sure to delete this roles ?')) {
+        axios
+          .delete(`/api/roles/${id}`)
+          .then(response => {
+            this.getRole()
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
+    },
+    fetch() {
+      axios
+        .get('/role-search', { params: { keywords: this.keywords } })
+        .then(response => (this.roles = response.data.data))
+        .catch(error => {})
+    },
+    changePage(num) {
+      this.currentPage = this.currentPage + num
+      this.getRole()
+    },
+  },
+  setup() {
     return {
-      status,
-      indexDataLocale,
-      desserts,
-      resetForm,
       icons: {
         mdiAlertOutline,
+        mdiMagnify,
         mdiCloudUploadOutline,
       },
     }

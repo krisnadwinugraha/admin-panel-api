@@ -1,13 +1,13 @@
 <template>
   <v-card flat class="mt-5">
-    <v-form @submit="create">
+    <v-form @submit.prevent="update">
       <div class="px-3">
         <v-card-text class="pt-5">
           <v-row>
             <v-col cols="12" sm="8" md="6">
-              <h2 class="mb-5">Create User</h2>
+              <h2 class="mb-5">Edit User</h2>
               <!-- Name -->
-              <v-text-field v-model="role.name" :type="'text'" label="Name" outlined dense></v-text-field>
+              <v-text-field v-model="role.name" :type="'text'" label="name" outlined dense></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">
@@ -26,7 +26,7 @@
         <!-- action buttons -->
         <v-card-text>
           <v-btn color="primary" type="submit" class="me-3 mt-3"> Save changes </v-btn>
-          <v-btn color="secondary" outlined class="mt-3"> Cancel </v-btn>
+          <v-btn color="secondary" @click.prevent="cancel" outlined class="mt-3"> Cancel </v-btn>
         </v-card-text>
       </div>
     </v-form>
@@ -40,7 +40,6 @@ import { ref } from '@vue/composition-api'
 import axios from 'axios'
 
 export default {
-  name: 'add-role',
   data() {
     return {
       role: {
@@ -49,16 +48,33 @@ export default {
       },
     }
   },
+  mounted() {
+    this.showRole()
+  },
   methods: {
-    async create() {
+    async showRole() {
       await axios
-        .post('/api/roles', this.role)
+        .get(`/api/roles/${this.$route.params.id}`)
+        .then(response => {
+          const { name } = response.data
+          this.role.name = name
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    async update() {
+      await axios
+        .patch(`/api/roles/${this.$route.params.id}`, this.role)
         .then(response => {
           this.$router.push({ name: 'pages-roles' })
         })
         .catch(error => {
           console.log(error)
         })
+    },
+    cancel() {
+      this.$router.push({ name: 'pages-roles' })
     },
   },
   setup() {

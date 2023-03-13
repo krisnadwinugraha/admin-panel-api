@@ -9,8 +9,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $blogs = User::paginate(5);
-        return response()->json($blogs);
+        $users = User::paginate(5);
+        return response()->json($users);
     }
 
     public function store(Request $request)

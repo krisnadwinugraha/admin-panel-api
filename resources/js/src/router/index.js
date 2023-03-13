@@ -146,6 +146,14 @@ const routes = [
     },
   },
   {
+    path: '/pages/roles/:id/edit',
+    name: 'role-edit',
+    component: () => import('@/views/pages/role/RoleEdit.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/pages/transactions',
     name: 'pages-transactions',
     component: () => import('@/views/pages/transaction/Transaction.vue'),

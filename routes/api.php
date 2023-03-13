@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -38,6 +39,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::resource('products', ProductController::class)->only(['index','store','show','update','destroy']);
     Route::resource('blogs', BlogController::class)->only(['index','store','show','update','destroy']);
     Route::resource('transactions', TransactionController::class)->only(['index','store','show','update','destroy']);
+    Route::resource('roles', RoleController::class)->only(['index','store','show','update','destroy']);
 
     Route::get('get-all-categories', [CategoryController::class, 'getAllCategories']);
     Route::get('get-all-products', [ProductController::class, 'getAllProducts']);
