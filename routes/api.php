@@ -29,10 +29,9 @@ Route::prefix('auth')->group(function(){
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('profile', [AuthController::class, 'profile']);
         Route::post('logout', [AuthController::class, 'logout']);
-       
     });
-    
 });
+
 Route::group(['middleware' => 'auth:api'], function(){
     Route::resource('users', UserController::class)->only(['index','store','show','update','destroy']);
     Route::resource('categories', CategoryController::class)->only(['index','store','show','update','destroy']);

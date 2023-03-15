@@ -136,16 +136,27 @@ export default {
         })
     },
     deleteTransaction(id) {
-      if (confirm('Are you sure to delete this transaction ?')) {
-        axios
-          .delete(`/api/transactions/${id}`)
-          .then(response => {
-            this.getTransactions()
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      }
+      this.$swal({
+        title: 'Are you sure?',
+        text: 'Are you sure want to delete this item!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      }).then(result => {
+        if (result.value) {
+          axios
+            .delete(`/api/transactions/${id}`)
+            .then(response => {
+              this.getTransactions()
+            })
+            .catch(error => {
+              console.log(error)
+            })
+          this.$swal('Deleted!', 'Your file has been deleted.', 'success')
+        }
+      })
     },
     fetch() {
       axios

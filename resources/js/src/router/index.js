@@ -10,6 +10,14 @@ const routes = [
     redirect: 'dashboard',
   },
   {
+    path: '/home',
+    name: 'home',
+    component: () => import('@/views/frontend/Index.vue'),
+    meta: {
+      layout: 'blank',
+    },
+  },
+  {
     path: '/dashboard',
     name: 'dashboard',
     component: () => import('@/views/dashboard/Dashboard.vue'),
