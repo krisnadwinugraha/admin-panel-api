@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Membuat Laporan PDF Dengan DOMPDF Laravel</title>
+	<title>Print Pdf</title>
 </head>
 <body>
 	<style type="text/css">
@@ -11,7 +11,7 @@
 		}
 	</style>
 	<center>
-		<h5>Membuat Laporan PDF Dengan DOMPDF Laravel</h4>
+		<h5>Report Transaksi</h4>
 	</center>
  
 	<table class='table table-bordered'>

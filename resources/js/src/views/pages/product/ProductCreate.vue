@@ -42,7 +42,6 @@
         <!-- action buttons -->
         <v-card-text>
           <v-btn color="primary" type="submit" class="me-3 mt-3"> Save changes </v-btn>
-          <v-btn color="secondary" @click="cancel" outlined class="mt-3"> Cancel </v-btn>
         </v-card-text>
       </div>
     </v-form>
@@ -92,9 +91,6 @@ export default {
         .catch(function (error) {
           currentObj.output = error
         })
-    },
-    cancel() {
-      this.$router.replace({ name: 'pages-products' }).catch(() => {})
     },
   },
   setup() {
