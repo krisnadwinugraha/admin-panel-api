@@ -1,56 +1,148 @@
 <template>
-  <v-card id="product-card">
-    <!-- tabs -->
-    <v-tabs v-model="tab" show-arrows>
-      <v-tab v-for="tab in tabs" :key="tab.icon">
-        <v-icon size="20" class="me-3">
-          {{ tab.icon }}
-        </v-icon>
-        <span>{{ tab.title }}</span>
-      </v-tab>
-    </v-tabs>
-
-    <!-- tabs item -->
-    <v-tabs-items v-model="tab">
-      <v-tab-item>
-        <product-index></product-index>
-      </v-tab-item>
-
-      <v-tab-item>
-        <product-create></product-create>
-      </v-tab-item>
-    </v-tabs-items>
+  <v-card id="report-card" class="py-5 px-5">
+    <v-card flat class="my-5 mx-5">
+      <h1>Product</h1>
+      <div class="d-flex align-center me-6 my-5">
+        <router-link :to="{ name: 'pages-products-create' }" class="btn btn-success"
+          ><v-btn color="primary" class="me-3"> Create </v-btn></router-link
+        >
+        <v-spacer></v-spacer>
+        <v-text-field
+          rounded
+          dense
+          outlined
+          :prepend-inner-icon="icons.mdiMagnify"
+          class="app-bar-search flex-grow-0"
+          hide-details
+          type="'text'"
+          v-model="keywords"
+        ></v-text-field>
+      </div>
+      <v-simple-table>
+        <template v-slot:default>
+          <thead>
+            <tr>
+              <th class="text-uppercase">Name</th>
+              <th class="text-uppercase">Deskripsi</th>
+              <th class="text-uppercase">Harga</th>
+              <th class="text-uppercase">Image</th>
+              <th class="text-uppercase">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="product in products" :key="product.name">
+              <td>{{ product.name }}</td>
+              <td>
+                {{ product.deskripsi }}
+              </td>
+              <td>
+                {{ product.harga }}
+              </td>
+              <td>
+                <v-img
+                  v-if="product.image"
+                  class="white--text align-end"
+                  :src="'/images/avatars/' + product.image"
+                  height="100"
+                  width="100"
+                  alt=""
+                />
+              </td>
+              <td>
+                <router-link :to="{ name: 'product-edit', params: { id: product.id } }" class="btn btn-success"
+                  ><v-btn color="primary" class="me-3"> Edit </v-btn></router-link
+                >
+                <v-btn color="danger" outlined @click="deleteProduct(product.id)" class="btn btn-danger">Delete</v-btn>
+              </td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+      <div class="d-flex align-center mx-6 my-5">
+        <v-spacer></v-spacer>
+        <v-btn color="primary" :disabled="currentPage === 1" @click="changePage(-1)">Prev</v-btn>
+        <v-btn color="primary" :disabled="currentPage === lastPage" @click="changePage(1)">Next >></v-btn>
+      </div>
+    </v-card>
   </v-card>
 </template>
 
 <script>
-import { mdiAccountOutline, mdiLockOpenOutline, mdiInformationOutline } from '@mdi/js'
+import { mdiAlertOutline, mdiMagnify, mdiCloudUploadOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
-
-// demos
-import ProductIndex from './ProductIndex.vue'
-import ProductCreate from './ProductCreate.vue'
+import axios from 'axios'
 
 export default {
-  components: {
-    ProductIndex,
-    ProductCreate,
+  name: 'products',
+  data() {
+    return {
+      products: [],
+      keywords: null,
+      lastPage: '',
+      currentPage: 1,
+    }
+  },
+  watch: {
+    keywords(after, before) {
+      this.fetch()
+    },
+  },
+  mounted() {
+    this.getProducts()
+  },
+  methods: {
+    async getProducts() {
+      await axios
+        .get(`/api/products?page=${this.currentPage}`)
+        .then(response => {
+          this.products = response.data.data
+          this.lastPage = response.data.last_page
+        })
+        .catch(error => {
+          console.log(error)
+          this.products = []
+        })
+    },
+    deleteProduct(id) {
+      this.$swal({
+        title: 'Are you sure?',
+        text: 'Are you sure want to delete this item!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      }).then(result => {
+        if (result.value) {
+          axios
+            .delete(`/api/products/${id}`)
+            .then(response => {
+              this.getProducts()
+            })
+            .catch(error => {
+              console.log(error)
+            })
+          this.$swal('Deleted!', 'Your file has been deleted.', 'success')
+        }
+      })
+    },
+    fetch() {
+      axios
+        .get('/product-search', { params: { keywords: this.keywords } })
+        .then(response => (this.products = response.data.data))
+        .catch(error => {})
+    },
+    changePage(num) {
+      this.currentPage = this.currentPage + num
+      this.getProducts()
+    },
   },
   setup() {
-    const tab = ref('')
-
-    // tabs
-    const tabs = [
-      { title: 'Index', icon: mdiAccountOutline },
-      { title: 'Create', icon: mdiLockOpenOutline },
-    ]
-
     return {
-      tab,
-      tabs,
       icons: {
-        mdiAccountOutline,
-        mdiLockOpenOutline,
+        mdiAlertOutline,
+        mdiMagnify,
+        mdiCloudUploadOutline,
       },
     }
   },

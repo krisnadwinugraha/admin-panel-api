@@ -130,6 +130,14 @@ const routes = [
     },
   },
   {
+    path: '/pages/products-create',
+    name: 'pages-products-create',
+    component: () => import('@/views/pages/product/ProductCreate.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/pages/products/:id/edit',
     name: 'product-edit',
     component: () => import('@/views/pages/product/ProductEdit.vue'),
