@@ -10,7 +10,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::latest()->paginate(5);
         return response()->json($categories);
     }
 
