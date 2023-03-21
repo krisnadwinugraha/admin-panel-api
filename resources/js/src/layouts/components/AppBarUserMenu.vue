@@ -130,6 +130,7 @@ import {
 } from '@mdi/js'
 import Auth from '../../Auth.js'
 import axios from 'axios'
+import NProgress from 'nprogress'
 
 export default {
   data() {
@@ -154,10 +155,15 @@ export default {
         })
     },
     logout() {
+      this.loading = true
+      NProgress.start()
+      NProgress.set(0.1)
       axios
         .post('http://127.0.0.1:8000/api/auth/logout')
         .then(({ data }) => {
           Auth.logout() //reset local storage
+          NProgress.done()
+          this.loading = false
           this.$router.push('/login')
         })
         .catch(error => {

@@ -34,6 +34,7 @@
         <nav-menu-link title="Login" :to="{ name: 'pages-login' }" target="_blank"></nav-menu-link>
         <nav-menu-link title="Register" :to="{ name: 'pages-register' }" target="_blank"></nav-menu-link>
         <nav-menu-link title="Error" :to="{ name: 'error-404' }" target="_blank"></nav-menu-link>
+        <nav-menu-link title="Home" :to="{ name: 'home' }" target="_blank"></nav-menu-link>
       </nav-menu-group>
 
       <nav-menu-section-title title="CONTENT MANAGEMENT"></nav-menu-section-title>

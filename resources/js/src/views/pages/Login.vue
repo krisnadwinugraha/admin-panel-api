@@ -54,7 +54,9 @@
               <a href="javascript:void(0)" class="mt-1"> Forgot Password? </a>
             </div>
 
-            <v-btn @click="login" block color="primary" class="mt-6"> Login </v-btn>
+            <v-btn :loading="loading" :disabled="loading" @click="login" block color="primary" class="mt-6">
+              Login
+            </v-btn>
           </v-form>
         </v-card-text>
 
@@ -87,6 +89,7 @@ import { mdiFacebook, mdiTwitter, mdiGithub, mdiGoogle, mdiEyeOutline, mdiEyeOff
 import { ref } from '@vue/composition-api'
 import Auth from '../../Auth'
 import axios from 'axios'
+import NProgress from 'nprogress'
 
 export default {
   data() {
@@ -100,13 +103,21 @@ export default {
 
   methods: {
     login() {
+      this.loading = true
+      NProgress.start()
+      NProgress.set(0.1)
       axios
         .post('http://127.0.0.1:8000/api/auth/login', this.user)
         .then(({ data }) => {
           Auth.login(data.access_token, data.user) //set local storage
+          NProgress.done()
+          this.loading = false
           this.$router.push('/dashboard')
         })
         .catch(error => {
+          NProgress.done()
+          this.$swal.fire('User Tidak Sesuai!!!')
+          this.loading = false
           console.log(error)
         })
     },
