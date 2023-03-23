@@ -67,7 +67,6 @@
 
 <script>
 import { mdiAlertOutline, mdiMagnify, mdiCloudUploadOutline } from '@mdi/js'
-import { ref } from '@vue/composition-api'
 import axios from 'axios'
 
 export default {
