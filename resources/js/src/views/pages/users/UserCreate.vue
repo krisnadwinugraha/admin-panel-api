@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="mt-5">
-    <v-form @submit="create">
+    <v-form @submit.prevent="create">
       <div class="px-3">
         <v-card-text class="pt-5">
           <v-row>
@@ -76,8 +76,6 @@ export default {
       await axios
         .post('/api/users', this.user)
         .then(response => {
-          console.log('ss')
-
           this.$router.push({ name: 'pages-users' })
         })
         .catch(error => {

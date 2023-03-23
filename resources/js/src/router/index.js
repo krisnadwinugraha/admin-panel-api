@@ -84,6 +84,14 @@ const routes = [
     },
   },
   {
+    path: '/pages/users-create',
+    name: 'pages-users-create',
+    component: () => import('@/views/pages/users/UserCreate.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/pages/users/:id/edit',
     name: 'user-edit',
     component: () => import('@/views/pages/users/UserEdit.vue'),
@@ -100,6 +108,14 @@ const routes = [
     },
   },
   {
+    path: '/pages/blogs-create',
+    name: 'pages-blogs-create',
+    component: () => import('@/views/pages/blog/BlogCreate.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/pages/blogs/:id/edit',
     name: 'blog-edit',
     component: () => import('@/views/pages/blog/BlogEdit.vue'),
@@ -111,6 +127,14 @@ const routes = [
     path: '/pages/categories',
     name: 'pages-categories',
     component: () => import('@/views/pages/category/Category.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/pages/categories-create',
+    name: 'pages-categories-create',
+    component: () => import('@/views/pages/category/CategoryCreate.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -159,6 +183,14 @@ const routes = [
     path: '/pages/roles',
     name: 'pages-roles',
     component: () => import('@/views/pages/role/Role.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/pages/roles-create',
+    name: 'pages-roles-create',
+    component: () => import('@/views/pages/role/RoleCreate.vue'),
     meta: {
       requiresAuth: true,
     },

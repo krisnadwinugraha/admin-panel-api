@@ -1,70 +1,133 @@
 <template>
-  <v-card id="user-card">
-    <!-- tabs -->
-    <v-tabs v-model="tab" show-arrows>
-      <v-tab v-for="tab in tabs" :key="tab.icon">
-        <v-icon size="20" class="me-3">
-          {{ tab.icon }}
-        </v-icon>
-        <span>{{ tab.title }}</span>
-      </v-tab>
-    </v-tabs>
-
-    <!-- tabs item -->
-    <v-tabs-items v-model="tab">
-      <v-tab-item>
-        <user-index :index-data="userData.index"></user-index>
-      </v-tab-item>
-
-      <v-tab-item>
-        <user-create :create-data="userData.create"></user-create>
-      </v-tab-item>
-    </v-tabs-items>
+  <v-card id="report-card" class="py-5 px-5">
+    <v-card flat class="my-5 mx-5">
+      <h1>Users</h1>
+      <div class="d-flex align-center me-6 my-5">
+        <router-link :to="{ name: 'pages-users-create' }" class="btn btn-success"
+          ><v-btn color="primary" class="me-3"> Create </v-btn></router-link
+        >
+        <v-spacer></v-spacer>
+        <v-text-field
+          rounded
+          dense
+          outlined
+          :prepend-inner-icon="icons.mdiMagnify"
+          class="app-bar-search flex-grow-0"
+          hide-details
+          type="'text'"
+          v-model="keywords"
+        ></v-text-field>
+      </div>
+      <v-simple-table>
+        <template v-slot:default>
+          <thead>
+            <tr>
+              <th class="text-uppercase">Name</th>
+              <th class="text-uppercase">Email</th>
+              <th class="text-uppercase">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="user in users" :key="user.name">
+              <td>{{ user.name }}</td>
+              <td>
+                {{ user.email }}
+              </td>
+              <td>
+                <router-link :to="{ name: 'user-edit', params: { id: user.id } }" class="btn btn-success"
+                  ><v-btn color="primary" class="me-3"> Edit </v-btn></router-link
+                >
+                <v-btn color="danger" outlined @click="deleteUser(user.id)" class="btn btn-danger">Delete</v-btn>
+              </td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+      <div class="d-flex align-center mx-6 my-5">
+        <v-spacer></v-spacer>
+        <v-btn color="primary" :disabled="currentPage === 1" @click="changePage(-1)">Prev</v-btn>
+        <v-btn color="primary" :disabled="currentPage === lastPage" @click="changePage(1)">Next >></v-btn>
+      </div>
+    </v-card>
   </v-card>
 </template>
 
 <script>
-import { mdiAccountOutline, mdiLockOpenOutline, mdiInformationOutline } from '@mdi/js'
+import { mdiAlertOutline, mdiMagnify, mdiCloudUploadOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
-
-// demos
-import UserIndex from './UserIndex.vue'
-import UserCreate from './UserCreate.vue'
+import axios from 'axios'
 
 export default {
-  components: {
-    UserIndex,
-    UserCreate,
-  },
-  setup() {
-    const tab = ref('')
-
-    // tabs
-    const tabs = [
-      { title: 'Index', icon: mdiAccountOutline },
-      { title: 'Create', icon: mdiLockOpenOutline },
-    ]
-
-    // account settings data
-    const userData = {
-      create: {
-        bio: 'The name’s John Deo. I am a tireless seeker of knowledge, occasional purveyor of wisdom and also, coincidentally, a graphic designer. Algolia helps businesses across industries quickly create relevant 😎, scaLabel 😀, and lightning 😍 fast search and discovery experiences.',
-        birthday: 'February 22, 1995',
-        phone: '954-006-0844',
-        website: 'https://themeselection.com/',
-        country: 'USA',
-        languages: ['English', 'Spanish'],
-        gender: 'male',
-      },
-    }
-
+  data() {
     return {
-      tab,
-      tabs,
-      userData,
+      users: [],
+      keywords: null,
+      lastPage: '',
+      currentPage: 1,
+    }
+  },
+  watch: {
+    keywords(after, before) {
+      this.fetch()
+    },
+  },
+  mounted() {
+    this.getUser()
+  },
+  methods: {
+    async getUser() {
+      await axios
+        .get(`/api/users?page=${this.currentPage}`)
+        .then(response => {
+          this.users = response.data.data
+          this.lastPage = response.data.last_page
+        })
+        .catch(error => {
+          console.log(error)
+          this.users = []
+        })
+    },
+    deleteUser(id) {
+      this.$swal({
+        title: 'Are you sure?',
+        text: 'Are you sure want to delete this item!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      }).then(result => {
+        if (result.value) {
+          axios
+            .delete(`/api/users/${id}`)
+            .then(response => {
+              this.getUser()
+            })
+            .catch(error => {
+              console.log(error)
+            })
+          this.$swal('Deleted!', 'Your file has been deleted.', 'success')
+        }
+      })
+    },
+    fetch() {
+      axios
+        .get('/user-search', { params: { keywords: this.keywords } })
+        .then(response => (this.users = response.data.data))
+        .catch(error => {})
+    },
+    changePage(num) {
+      this.currentPage = this.currentPage + num
+      this.getUser()
+    },
+  },
+
+  setup() {
+    return {
       icons: {
-        mdiAccountOutline,
-        mdiLockOpenOutline,
+        mdiAlertOutline,
+        mdiMagnify,
+        mdiCloudUploadOutline,
       },
     }
   },
