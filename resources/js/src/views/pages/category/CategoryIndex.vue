@@ -26,7 +26,7 @@
           <tr v-for="category in categories" :key="category.name">
             <td>{{ category.name }}</td>
             <td>
-              {{ category.deskripsi }}
+              {{ category.description }}
             </td>
             <td>
               <router-link :to="{ name: 'category-edit', params: { id: category.id } }" class="btn btn-success"

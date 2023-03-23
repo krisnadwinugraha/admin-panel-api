@@ -10,7 +10,13 @@
               <v-text-field v-model="category.name" :type="'text'" label="name" outlined dense></v-text-field>
 
               <!-- Deskripsi -->
-              <v-text-field v-model="category.deskripsi" :type="'text'" label="deskripsi" outlined dense></v-text-field>
+              <v-text-field
+                v-model="category.description"
+                :type="'text'"
+                label="description"
+                outlined
+                dense
+              ></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">
@@ -47,7 +53,7 @@ export default {
     return {
       category: {
         name: '',
-        deskripsi: '',
+        description: '',
       },
     }
   },
@@ -59,9 +65,9 @@ export default {
       await axios
         .get(`/api/categories/${this.$route.params.id}`)
         .then(response => {
-          const { name, deskripsi } = response.data
+          const { name, description } = response.data
           this.category.name = name
-          this.category.deskripsi = deskripsi
+          this.category.description = description
         })
         .catch(error => {
           console.log(error)

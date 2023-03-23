@@ -48,7 +48,7 @@ class CategoryController extends Controller
     public function search(Request $request)
     {
         $categories = Category::where('name', 'like', '%' . $request->keywords . '%')
-        ->orWhere('deskripsi', 'like', '%' . $request->keywords . '%')->paginate(5);
+        ->orWhere('description', 'like', '%' . $request->keywords . '%')->paginate(5);
         return response()->json($categories); 
     }
 

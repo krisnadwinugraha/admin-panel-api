@@ -10,10 +10,16 @@
               <v-text-field v-model="product.name" :type="'text'" label="Name" outlined dense></v-text-field>
 
               <!-- Deskripsi -->
-              <v-text-field v-model="product.deskripsi" :type="'text'" label="Deskripsi" outlined dense></v-text-field>
+              <v-text-field
+                v-model="product.description"
+                :type="'text'"
+                label="Deskripsi"
+                outlined
+                dense
+              ></v-text-field>
 
-              <!-- Harga -->
-              <v-text-field v-model="product.harga" :type="'number'" label="Harga" outlined dense></v-text-field>
+              <!-- Price -->
+              <v-text-field v-model="product.price" :type="'number'" label="Price" outlined dense></v-text-field>
 
               <!-- Image -->
               <v-file-input
@@ -60,8 +66,8 @@ export default {
     return {
       product: {
         name: '',
-        deskripsi: '',
-        harga: '',
+        description: '',
+        price: '',
         image: '',
       },
     }
@@ -80,8 +86,8 @@ export default {
 
       let formData = new FormData()
       formData.append('name', this.product.name)
-      formData.append('deskripsi', this.product.deskripsi)
-      formData.append('harga', this.product.harga)
+      formData.append('description', this.product.description)
+      formData.append('price', this.product.price)
       formData.append('image', this.product.image)
       axios
         .post('/api/products', formData, config)

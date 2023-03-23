@@ -35,18 +35,18 @@
           </thead>
           <tbody>
             <tr v-for="transaction in transactions" :key="transaction.title">
-              <td>{{ transaction.nama }}</td>
+              <td>{{ transaction.name }}</td>
               <td>
                 {{ transaction.product_id.name }}
               </td>
               <td>
-                {{ transaction.product_id.harga }}
+                {{ transaction.product_id.price }}
               </td>
               <td>
                 {{ transaction.qty }}
               </td>
               <td>
-                {{ transaction.product_id.harga * transaction.qty }}
+                {{ transaction.product_id.price * transaction.qty }}
               </td>
               <td>
                 {{ transaction.status }}

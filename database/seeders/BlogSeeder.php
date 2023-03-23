@@ -15,37 +15,37 @@ class BlogSeeder extends Seeder
     public function run()
     {
         Blog::create([
-            'title' => 'Judul Blog 1',
+            'title' => 'Blog Title 1',
             'category_id' => '1',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
-            'title' => 'Judul Blog 2',
+            'title' => 'Blog Title 2',
             'category_id' => '2',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
-            'title' => 'Judul Blog 3',
+            'title' => 'Blog Title 3',
             'category_id' => '3',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
-            'title' => 'Judul Blog 4',
+            'title' => 'Blog Title 4',
             'category_id' => '2',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
-            'title' => 'Judul Blog 5',
+            'title' => 'Blog Title 5',
             'category_id' => '1',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
-            'title' => 'Judul Blog 6',
+            'title' => 'Blog Title 6',
             'category_id' => '2',
             'content' => 'Lorem ipsum dolor sit',
         ]);

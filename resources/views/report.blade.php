@@ -31,11 +31,11 @@
 			@foreach($transaction as $data)
 			<tr>
 				<td>{{ $i++ }}</td>
-				<td>{{$data->nama}}</td>
+				<td>{{$data->name}}</td>
 				<td>{{$data->productId->name}}</td>
-				<td>{{$data->productId->harga }}</td>
+				<td>{{$data->productId->price }}</td>
 				<td>{{$data->qty}}</td>
-				<td>{{$data->productId->harga * $data->qty }}</td>
+				<td>{{$data->productId->price * $data->qty }}</td>
 				<td>{{$data->status}}</td>
 			</tr>
 			@endforeach

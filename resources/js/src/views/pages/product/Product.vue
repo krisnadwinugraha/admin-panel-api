@@ -24,7 +24,7 @@
             <tr>
               <th class="text-uppercase">Name</th>
               <th class="text-uppercase">Description</th>
-              <th class="text-uppercase">Harga</th>
+              <th class="text-uppercase">Price</th>
               <th class="text-uppercase">Image</th>
               <th class="text-uppercase">Action</th>
             </tr>
@@ -33,10 +33,10 @@
             <tr v-for="product in products" :key="product.name">
               <td>{{ product.name }}</td>
               <td>
-                {{ product.deskripsi }}
+                {{ product.description }}
               </td>
               <td>
-                {{ product.harga }}
+                {{ product.price }}
               </td>
               <td>
                 <v-img

@@ -6,8 +6,8 @@
           <v-row>
             <v-col cols="12" sm="8" md="6">
               <h1 class="mb-5">Create Transaction</h1>
-              <!-- Nama -->
-              <v-text-field v-model="transaction.nama" :type="'text'" label="Nama" outlined dense></v-text-field>
+              <!-- Name -->
+              <v-text-field v-model="transaction.name" :type="'text'" label="Name" outlined dense></v-text-field>
 
               <!-- Products -->
               <v-select
@@ -69,7 +69,7 @@ export default {
       products: [],
       status: ['Belum', 'Dibayar', 'Pending'],
       transaction: {
-        nama: '',
+        name: '',
         product_id: '',
         qty: '',
         status: '',

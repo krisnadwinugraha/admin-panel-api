@@ -29,8 +29,8 @@
 
                 <v-card-title> {{ product.name }} </v-card-title>
 
-                <v-card-subtitle> {{ product.deskripsi }} </v-card-subtitle>
-                <v-card-subtitle> {{ product.harga }} </v-card-subtitle>
+                <v-card-subtitle> {{ product.description }} </v-card-subtitle>
+                <v-card-subtitle> {{ product.price }} </v-card-subtitle>
               </v-card>
             </v-slide-group-item>
           </v-slide-group>

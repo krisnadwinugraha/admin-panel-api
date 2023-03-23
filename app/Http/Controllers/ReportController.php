@@ -18,7 +18,7 @@ class ReportController extends Controller
 
     public function search(Request $request)
     {
-        $blogs = Transaction::with('productId')->where('nama', 'like', '%' . $request->keywords . '%')
+        $blogs = Transaction::with('productId')->where('name', 'like', '%' . $request->keywords . '%')
         ->orWhere('product_id', 'like', '%' . $request->keywords . '%')
         ->orWhere('status', 'like', '%' . $request->keywords . '%')
         ->orWhere('qty', 'like', '%' . $request->keywords . '%')->paginate(5);

@@ -6,8 +6,8 @@
           <v-row>
             <v-col cols="12" sm="8" md="6">
               <h1 class="mb-5">Edit Transaction</h1>
-              <!-- Nama -->
-              <v-text-field v-model="transaction.nama" :type="'text'" label="Nama" outlined dense></v-text-field>
+              <!-- Name -->
+              <v-text-field v-model="transaction.name" :type="'text'" label="Name" outlined dense></v-text-field>
 
               <!-- Category -->
               <v-select
@@ -67,7 +67,7 @@ export default {
     return {
       transaction: {
         transactions: [],
-        nama: '',
+        name: '',
         product_id: '',
         qty: '',
       },
@@ -94,8 +94,8 @@ export default {
       await axios
         .get(`/api/transactions/${this.$route.params.id}`)
         .then(response => {
-          const { nama, product_id, qty, status } = response.data
-          this.transaction.nama = nama
+          const { name, product_id, qty, status } = response.data
+          this.transaction.name = name
           this.transaction.product_id = product_id
           this.transaction.qty = qty
           this.transaction.status = status

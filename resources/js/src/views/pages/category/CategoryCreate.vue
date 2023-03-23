@@ -10,7 +10,13 @@
               <v-text-field v-model="category.name" :type="'text'" label="Name" outlined dense></v-text-field>
 
               <!-- Deskripsi -->
-              <v-text-field v-model="category.deskripsi" :type="'text'" label="Deskripsi" outlined dense></v-text-field>
+              <v-text-field
+                v-model="category.description"
+                :type="'text'"
+                label="Deskripsi"
+                outlined
+                dense
+              ></v-text-field>
             </v-col>
           </v-row>
         </v-card-text>
@@ -37,7 +43,7 @@ export default {
     return {
       category: {
         name: '',
-        deskripsi: '',
+        description: '',
       },
     }
   },

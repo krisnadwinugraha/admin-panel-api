@@ -16,32 +16,32 @@ class CategorySeeder extends Seeder
     {
         Category::create([
             'name' => 'category 1',
-            'deskripsi' => 'deskripsi category 1',
+            'description' => 'description category 1',
         ]);
 
         Category::create([
             'name' => 'category 2',
-            'deskripsi' => 'deskripsi category 2',
+            'description' => 'description category 2',
         ]);
 
         Category::create([
             'name' => 'category 3',
-            'deskripsi' => 'deskripsi category 3',
+            'description' => 'description category 3',
         ]);
 
         Category::create([
             'name' => 'category 4',
-            'deskripsi' => 'deskripsi category 4',
+            'description' => 'description category 4',
         ]);
 
         Category::create([
             'name' => 'category 5',
-            'deskripsi' => 'deskripsi category 5',
+            'description' => 'description category 5',
         ]);
 
         Category::create([
             'name' => 'category 6',
-            'deskripsi' => 'deskripsi category 6',
+            'description' => 'description category 6',
         ]);
     }
 }

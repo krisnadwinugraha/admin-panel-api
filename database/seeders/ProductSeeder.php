@@ -16,43 +16,43 @@ class ProductSeeder extends Seeder
     {
         Product::create([
             'name' => 'product 1',
-            'deskripsi' => 'deskripsi product 1',
-            'harga' => '20000',
+            'description' => 'description product 1',
+            'price' => '20000',
             'image' => 'pizza.jpg',
         ]);
 
         Product::create([
             'name' => 'product 2',
-            'deskripsi' => 'deskripsi product 2',
-            'harga' => '25000',
+            'description' => 'description product 2',
+            'price' => '25000',
             'image' => 'pizza.jpg',
         ]);
 
         Product::create([
             'name' => 'product 3',
-            'deskripsi' => 'deskripsi product 3',
-            'harga' => '40000',
+            'description' => 'description product 3',
+            'price' => '40000',
             'image' => 'pizza.jpg',
         ]);
 
         Product::create([
             'name' => 'product 4',
-            'deskripsi' => 'deskripsi product 4',
-            'harga' => '50000',
+            'description' => 'description product 4',
+            'price' => '50000',
             'image' => 'pizza.jpg',
         ]);
 
         Product::create([
             'name' => 'product 5',
-            'deskripsi' => 'deskripsi product 5',
-            'harga' => '60000',
+            'description' => 'description product 5',
+            'price' => '60000',
             'image' => 'pizza.jpg',
         ]);
 
         Product::create([
             'name' => 'product 6',
-            'deskripsi' => 'deskripsi product 6',
-            'harga' => '60000',
+            'description' => 'description product 6',
+            'price' => '60000',
             'image' => 'pizza.jpg',
         ]);
     }
