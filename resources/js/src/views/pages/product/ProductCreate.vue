@@ -77,7 +77,6 @@ export default {
       const config = {
         headers: { 'content-type': 'multipart/form-data' },
       }
-      console.log(this.product.image)
 
       let formData = new FormData()
       formData.append('name', this.product.name)

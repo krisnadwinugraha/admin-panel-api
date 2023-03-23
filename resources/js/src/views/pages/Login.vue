@@ -62,8 +62,8 @@
 
         <!-- create new account  -->
         <v-card-text class="d-flex align-center justify-center flex-wrap mt-2">
-          <span class="me-2"> Tidak Punya Akun? </span>
-          <router-link :to="{ name: 'pages-register' }"> Buat Akun </router-link>
+          <span class="me-2"> Not Have Account? </span>
+          <router-link :to="{ name: 'pages-register' }"> Make Account</router-link>
         </v-card-text>
       </v-card>
     </div>

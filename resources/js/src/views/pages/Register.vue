@@ -111,7 +111,6 @@ export default {
 
   methods: {
     register() {
-      console.log(this.user)
       axios
         .post('http://127.0.0.1:8000/api/auth/register', this.user)
         .then(({ data }) => {

@@ -75,7 +75,6 @@ export default {
         .then(response => {
           this.roles = response.data.data
           this.lastPage = response.data.last_page
-          console.log(this.roles)
         })
         .catch(error => {
           console.log(error)
