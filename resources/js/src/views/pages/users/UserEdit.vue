@@ -51,6 +51,7 @@
 <script>
 // eslint-disable-next-line object-curly-newline
 import { mdiKeyOutline, mdiLockOpenOutline, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
+import { ref } from '@vue/composition-api'
 import axios from 'axios'
 
 export default {
@@ -71,10 +72,9 @@ export default {
       await axios
         .get(`/api/users/${this.$route.params.id}`)
         .then(response => {
-          const { name, email, password } = response.data
+          const { name, email } = response.data
           this.user.name = name
           this.user.email = email
-          this.user.password = password
         })
         .catch(error => {
           console.log(error)
@@ -95,7 +95,9 @@ export default {
     },
   },
   setup() {
+    const isPasswordVisible = ref(false)
     return {
+      isPasswordVisible,
       icons: {
         mdiKeyOutline,
         mdiLockOpenOutline,

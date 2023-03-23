@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Validator;
 
 class UserController extends Controller
 {
@@ -15,7 +18,23 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $user = User::create($request->post());
+        $requestData = $request->all();
+        $validator = Validator::make($requestData,[
+            'name' => 'required|max:55',
+            'email' => 'email|required|unique:users',
+            'password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $requestData['password'] = Hash::make($requestData['password']);
+
+        $user = User::create($requestData);
+
         return response()->json([
             'message'=>'User Created Successfully!!',
             'user'=>$user
@@ -29,7 +48,26 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $user->fill($request->post())->save();
+        $requestData = $request->all();
+        $validator = Validator::make($requestData,[
+            'name' => 'required|max:55',
+            'email' => 'email|required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        if($requestData['password'] != null){
+            $requestData['password'] = Hash::make($requestData['password']);
+        }else{
+            $requestData['password'] = $user->password;
+        }
+
+        $user = User::whereId($user->id)->update($requestData);
+
         return response()->json([
             'message'=>'User Updated Successfully!!',
             'user'=>$user
