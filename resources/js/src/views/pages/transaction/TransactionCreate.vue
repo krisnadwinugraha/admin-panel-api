@@ -5,7 +5,7 @@
         <v-card-text class="pt-5">
           <v-row>
             <v-col cols="12" sm="8" md="6">
-              <h2 class="mb-5">Create Transaction</h2>
+              <h1 class="mb-5">Create Transaction</h1>
               <!-- Nama -->
               <v-text-field v-model="transaction.nama" :type="'text'" label="Nama" outlined dense></v-text-field>
 
@@ -61,7 +61,6 @@
 <script>
 // eslint-disable-next-line object-curly-newline
 import { mdiKeyOutline, mdiLockOpenOutline, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
-import { ref } from '@vue/composition-api'
 import axios from 'axios'
 
 export default {

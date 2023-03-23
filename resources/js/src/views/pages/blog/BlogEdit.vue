@@ -5,7 +5,7 @@
         <v-card-text class="pt-5">
           <v-row>
             <v-col cols="12" sm="8" md="6">
-              <h2 class="mb-5">Edit Blog</h2>
+              <h1 class="mb-5">Edit Blog</h1>
               <!-- Title -->
               <v-text-field v-model="blog.title" :type="'text'" label="Title" outlined dense></v-text-field>
 

@@ -1,7 +1,7 @@
 <template>
   <v-card id="report-card" class="py-5 px-5">
     <v-card flat class="my-5 mx-5">
-      <h1>Report Transaksi</h1>
+      <h1>Report Transaction</h1>
       <div class="d-flex align-center me-6 my-5">
         <a href="../print-pdf" class="btn btn-success" target="_blank" style="text-decoration: none; color: inherit"
           ><v-btn color="primary" class="me-3"> Print PDF </v-btn></a
@@ -25,11 +25,11 @@
         <template v-slot:default>
           <thead>
             <tr>
-              <th class="text-uppercase">Nama</th>
+              <th class="text-uppercase">Name</th>
               <th class="text-uppercase">Product</th>
-              <th class="text-uppercase">Harga Product</th>
+              <th class="text-uppercase">Product Price</th>
               <th class="text-uppercase">QTY</th>
-              <th class="text-uppercase">Total Harga</th>
+              <th class="text-uppercase">Total Price</th>
               <th class="text-uppercase">Status</th>
             </tr>
           </thead>

@@ -1,9 +1,8 @@
 <template>
   <v-card id="report-card" class="py-5 px-5">
     <v-card flat class="my-5 mx-5">
-      <h1>Transaksi</h1>
+      <h1>Transaction</h1>
       <div class="d-flex align-center me-6 my-5">
-        <!-- Products -->
         <v-select
           :items="products"
           v-model="filters"
@@ -34,11 +33,11 @@
         <template v-slot:default>
           <thead>
             <tr>
-              <th class="text-uppercase">Nama</th>
+              <th class="text-uppercase">Name</th>
               <th class="text-uppercase">Product</th>
-              <th class="text-uppercase">Harga Product</th>
+              <th class="text-uppercase">Product Price</th>
               <th class="text-uppercase">QTY</th>
-              <th class="text-uppercase">Total Harga</th>
+              <th class="text-uppercase">Total Price</th>
               <th class="text-uppercase">Status</th>
               <th class="text-uppercase">Action</th>
             </tr>
@@ -84,7 +83,6 @@
 
 <script>
 import { mdiAlertOutline, mdiMagnify, mdiCloudUploadOutline } from '@mdi/js'
-import { ref } from '@vue/composition-api'
 import axios from 'axios'
 
 export default {

@@ -18,7 +18,7 @@
         <thead>
           <tr>
             <th class="text-uppercase">Name</th>
-            <th class="text-uppercase">Deskripsi</th>
+            <th class="text-uppercase">Description</th>
             <th class="text-uppercase">Action</th>
           </tr>
         </thead>

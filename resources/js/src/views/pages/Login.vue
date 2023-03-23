@@ -116,7 +116,7 @@ export default {
         })
         .catch(error => {
           NProgress.done()
-          this.$swal.fire('User Tidak Sesuai!!!')
+          this.$swal.fire('User Not Match!!!')
           this.loading = false
           console.log(error)
         })

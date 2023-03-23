@@ -18,11 +18,11 @@
 		<thead>
 			<tr>
 				<th>No</th>
-				<th>Nama</th>
-				<th>Nama Product</th>
-				<th>Harga Product</th>
+				<th>Name</th>
+				<th>Product Name</th>
+				<th>Product Price</th>
 				<th>Qty</th>
-				<th>Total Harga</th>
+				<th>Total Price</th>
 				<th>Status</th>
 			</tr>
 		</thead>

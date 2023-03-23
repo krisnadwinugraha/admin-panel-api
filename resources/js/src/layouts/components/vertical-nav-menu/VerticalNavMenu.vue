@@ -39,25 +39,25 @@
 
       <nav-menu-section-title title="CONTENT MANAGEMENT"></nav-menu-section-title>
       <nav-menu-link
-        title="Blog"
+        title="Blogs"
         :to="{ name: 'pages-blogs' }"
         :icon="icons.mdiAccountBoxMultipleOutline"
       ></nav-menu-link>
       <nav-menu-link
-        title="Category"
+        title="Categories"
         :to="{ name: 'pages-categories' }"
         :icon="icons.mdiClipboardOutline"
       ></nav-menu-link>
-      <nav-menu-link title="Product" :to="{ name: 'pages-products' }" :icon="icons.mdiDiamondOutline"></nav-menu-link>
+      <nav-menu-link title="Products" :to="{ name: 'pages-products' }" :icon="icons.mdiDiamondOutline"></nav-menu-link>
 
-      <nav-menu-group title="Transaction" :icon="icons.mdiAccountCashOutline">
+      <nav-menu-group title="Transactions" :icon="icons.mdiAccountCashOutline">
         <nav-menu-link title="Index" :to="{ name: 'pages-transactions' }"></nav-menu-link>
         <nav-menu-link title="Create" :to="{ name: 'pages-transactions-create' }"></nav-menu-link>
       </nav-menu-group>
 
       <nav-menu-section-title title="USER MANAGEMENT"></nav-menu-section-title>
-      <nav-menu-link title="User" :to="{ name: 'pages-users' }" :icon="icons.mdiAccountOutline"></nav-menu-link>
-      <nav-menu-link title="Role" :to="{ name: 'pages-roles' }" :icon="icons.mdiAccountAlertOutline"></nav-menu-link>
+      <nav-menu-link title="Users" :to="{ name: 'pages-users' }" :icon="icons.mdiAccountOutline"></nav-menu-link>
+      <nav-menu-link title="Roles" :to="{ name: 'pages-roles' }" :icon="icons.mdiAccountAlertOutline"></nav-menu-link>
       <nav-menu-link
         title="Account Settings"
         :to="{ name: 'pages-account-settings' }"
@@ -66,7 +66,7 @@
 
       <nav-menu-section-title title="REPORT"></nav-menu-section-title>
       <nav-menu-link
-        title="Report"
+        title="Reports"
         :to="{ name: 'pages-reports' }"
         :icon="icons.mdiFileMultipleOutline"
       ></nav-menu-link>
