@@ -67,7 +67,7 @@ export default {
   data() {
     return {
       products: [],
-      status: ['Belum', 'Dibayar', 'Pending'],
+      status: ['Not Yet', 'Paid', 'Pending'],
       transaction: {
         name: '',
         product_id: '',

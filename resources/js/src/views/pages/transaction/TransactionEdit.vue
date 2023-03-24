@@ -71,7 +71,7 @@ export default {
         product_id: '',
         qty: '',
       },
-      status: ['Belum', 'Dibayar', 'Pending'],
+      status: ['Not Yet', 'Paid', 'Pending'],
     }
   },
   mounted() {
