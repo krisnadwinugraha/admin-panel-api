@@ -15,33 +15,33 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::create([
-            'name' => 'category 1',
-            'description' => 'description category 1',
+            'name' => 'Food',
+            'description' => 'Food Category',
         ]);
 
         Category::create([
-            'name' => 'category 2',
-            'description' => 'description category 2',
+            'name' => 'Drink',
+            'description' => 'Drink Category',
         ]);
 
         Category::create([
-            'name' => 'category 3',
-            'description' => 'description category 3',
+            'name' => 'Apparel',
+            'description' => 'Cloth, Pants, Jacket Category',
         ]);
 
         Category::create([
-            'name' => 'category 4',
-            'description' => 'description category 4',
+            'name' => 'Fruit',
+            'description' => 'Fruit Category',
         ]);
 
         Category::create([
-            'name' => 'category 5',
-            'description' => 'description category 5',
+            'name' => 'Vegetable',
+            'description' => 'Vegetable Category',
         ]);
 
         Category::create([
-            'name' => 'category 6',
-            'description' => 'description category 6',
+            'name' => 'Other',
+            'description' => 'Other Category Not Listed Here',
         ]);
     }
 }

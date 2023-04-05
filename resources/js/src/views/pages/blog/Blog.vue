@@ -34,9 +34,8 @@
               <td>
                 {{ blog.category_id.name }}
               </td>
-              <td width="50%">
-                {{ blog.content }}
-              </td>
+              <td v-if="blog.content.length < 45">{{ blog.content }}</td>
+              <td v-else>{{ blog.content.substring(0, 45) + '..' }}</td>
               <td>
                 <router-link :to="{ name: 'blog-edit', params: { id: blog.id } }" class="btn btn-success"
                   ><v-btn color="primary" class="me-3"> Edit </v-btn></router-link

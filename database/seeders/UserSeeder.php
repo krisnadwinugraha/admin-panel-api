@@ -19,12 +19,12 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'name' => 'user 1',
-            'email' => 'user1@gmail.com',
+            'name' => 'user',
+            'email' => 'user@gmail.com',
             'password' => Hash::make('123456')
         ]);
 
-        $role = Role::create(['name' => 'Admin']);
+        $role = Role::create(['name' => 'User']);
 
         $permissions = Permission::pluck('id','id')->all();
     
@@ -32,36 +32,18 @@ class UserSeeder extends Seeder
     
         $user->assignRole([$role->name]);
 
-        User::create([
-            'name' => 'user 2',
-            'email' => 'user2@gmail.com',
+        $admin = User::create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('123456')
         ]);
-
-        User::create([
-            'name' => 'user 3',
-            'email' => 'user3@gmail.com',
-            'password' => Hash::make('123456')
-        ]);
-
-        User::create([
-            'name' => 'user 4',
-            'email' => 'user4@gmail.com',
-            'password' => Hash::make('123456')
-        ]);
-
-        User::create([
-            'name' => 'user 5',
-            'email' => 'user5@gmail.com',
-            'password' => Hash::make('123456')
-        ]);
-
-        User::create([
-            'name' => 'user 6',
-            'email' => 'user6@gmail.com',
-            'password' => Hash::make('123456')
-        ]);
-
         
+        $role = Role::create(['name' => 'Admin']);
+
+        $permissions = Permission::pluck('id','id')->all();
+    
+        $role->syncPermissions($permissions);
+    
+        $admin->assignRole([$role->name]);
     }
 }

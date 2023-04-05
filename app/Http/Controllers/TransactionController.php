@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use DB;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
@@ -59,5 +62,37 @@ class TransactionController extends Controller
         ->orWhere('product_id', 'like', '%' . $request->filters . '%')
         ->paginate(5);
         return response()->json($transactions); 
+    }
+
+    public function getAllTransactions()
+    {
+        $transactions = Transaction::with('productId')->get();
+        return response()->json($transactions);
+    }
+
+    public function getTotalPrice()
+    {
+        $total = Transaction::select('products.name', 'products.id as product_id','products.price','transactions.qty', 'transactions.created_at','transactions.id as id') 
+            ->whereBetween('transactions.created_at', [
+                Carbon::now()->startOfYear(),
+                Carbon::now()->endOfYear(),
+            ])
+            ->join('products', 'products.id', '=', 'transactions.product_id')
+            ->sum(DB::raw('products.price * transactions.qty'));
+
+        return response()->json($total);
+    }
+
+    public function getTotalPriceLastYear()
+    {
+        $total = Transaction::select('products.name', 'products.id as product_id','products.price','transactions.qty', 'transactions.created_at','transactions.id as id') 
+            ->whereBetween('transactions.created_at', [
+                Carbon::now()->subYear()->startOfYear(),
+                Carbon::now()->subYear()->endOfYear(),
+            ])
+            ->join('products', 'products.id', '=', 'transactions.product_id')
+            ->sum(DB::raw('products.price * transactions.qty'));
+
+        return response()->json($total);
     }
 }

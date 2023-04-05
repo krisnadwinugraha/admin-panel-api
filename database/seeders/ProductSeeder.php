@@ -15,45 +15,45 @@ class ProductSeeder extends Seeder
     public function run()
     {
         Product::create([
-            'name' => 'product 1',
-            'description' => 'description product 1',
-            'price' => '20000',
+            'name' => 'Pizza',
+            'description' => 'Pizza with a lot of toppings you can choose',
+            'price' => '20',
             'image' => 'pizza.jpg',
         ]);
 
         Product::create([
-            'name' => 'product 2',
-            'description' => 'description product 2',
-            'price' => '25000',
-            'image' => 'pizza.jpg',
+            'name' => 'Orange',
+            'description' => '1 Kg of Orange',
+            'price' => '2',
+            'image' => 'orange.jpg',
         ]);
 
         Product::create([
-            'name' => 'product 3',
-            'description' => 'description product 3',
-            'price' => '40000',
-            'image' => 'pizza.jpg',
+            'name' => 'Cake',
+            'description' => 'Cake with your choice of topping',
+            'price' => '20',
+            'image' => 'cake.png',
         ]);
 
         Product::create([
-            'name' => 'product 4',
-            'description' => 'description product 4',
-            'price' => '50000',
-            'image' => 'pizza.jpg',
+            'name' => 'Peanuts',
+            'description' => '1 Kg of Peanuts',
+            'price' => '2',
+            'image' => 'peanuts.jpg',
         ]);
 
         Product::create([
-            'name' => 'product 5',
-            'description' => 'description product 5',
-            'price' => '60000',
-            'image' => 'pizza.jpg',
+            'name' => 'Strawberry',
+            'description' => '1 Kg of Strawberry',
+            'price' => '10',
+            'image' => 'strawberry.jpg',
         ]);
 
         Product::create([
-            'name' => 'product 6',
-            'description' => 'description product 6',
-            'price' => '60000',
-            'image' => 'pizza.jpg',
+            'name' => 'Tomato',
+            'description' => '1 Kg of Tomato',
+            'price' => '5',
+            'image' => 'tomato.jpg',
         ]);
     }
 }

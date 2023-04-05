@@ -42,4 +42,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::get('get-all-categories', [CategoryController::class, 'getAllCategories']);
     Route::get('get-all-products', [ProductController::class, 'getAllProducts']);
+    Route::get('get-all-transactions', [TransactionController::class, 'getAllTransactions']);
+    Route::get('get-total-price', [TransactionController::class, 'getTotalPrice']);
+    Route::get('get-total-price-last-year', [TransactionController::class, 'getTotalPriceLastYear']);
 });

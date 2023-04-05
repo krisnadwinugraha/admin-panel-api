@@ -27,6 +27,16 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        parent::boot();
+
+        Event::listen(CommandFinished::class, function(CommandFinished $event) {
+            if($event->command === 'migrate:fresh') {
+                Artisan::call('passport:install', [ '--force' => true]);
+                echo Artisan::output();
+            }else if($event->command === 'migrate:fresh --seed') {
+                Artisan::call('passport:install', [ '--force' => true]);
+                echo Artisan::output();
+            }
+        });
     }
 }

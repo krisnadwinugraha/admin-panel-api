@@ -15,37 +15,37 @@ class BlogSeeder extends Seeder
     public function run()
     {
         Blog::create([
-            'title' => 'Blog Title 1',
+            'title' => 'How To Eat More Healthy',
             'category_id' => '1',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
-            'title' => 'Blog Title 2',
+            'title' => 'Benefit Of Drink Water',
             'category_id' => '2',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
-            'title' => 'Blog Title 3',
+            'title' => 'Fruit And Diet',
+            'category_id' => '4',
+            'content' => 'Lorem ipsum dolor sit',
+        ]);
+
+        Blog::create([
+            'title' => 'Make Your Clothes Look Good',
             'category_id' => '3',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
-            'title' => 'Blog Title 4',
-            'category_id' => '2',
-            'content' => 'Lorem ipsum dolor sit',
-        ]);
-
-        Blog::create([
-            'title' => 'Blog Title 5',
+            'title' => 'Food Recommendation Today',
             'category_id' => '1',
             'content' => 'Lorem ipsum dolor sit',
         ]);
 
         Blog::create([
-            'title' => 'Blog Title 6',
+            'title' => 'Drink Recommendation Today',
             'category_id' => '2',
             'content' => 'Lorem ipsum dolor sit',
         ]);

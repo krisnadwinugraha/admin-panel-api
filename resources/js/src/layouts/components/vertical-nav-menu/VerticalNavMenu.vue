@@ -50,7 +50,7 @@
       ></nav-menu-link>
       <nav-menu-link title="Products" :to="{ name: 'pages-products' }" :icon="icons.mdiDiamondOutline"></nav-menu-link>
 
-      <nav-menu-group title="Transactions" :icon="icons.mdiAccountCashOutline">
+      <nav-menu-group title="Trades" :icon="icons.mdiAccountCashOutline">
         <nav-menu-link title="Index" :to="{ name: 'pages-transactions' }"></nav-menu-link>
         <nav-menu-link title="Create" :to="{ name: 'pages-transactions-create' }"></nav-menu-link>
       </nav-menu-group>
