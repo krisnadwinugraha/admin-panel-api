@@ -60,7 +60,7 @@
             {{ link }}
           </v-btn>
           <v-col class="primary lighten-2 py-4 text-center white--text" cols="12">
-            {{ new Date().getFullYear() }} — <strong>Spasi Digicode</strong>
+            {{ new Date().getFullYear() }} — <strong>Admin Panel</strong>
           </v-col>
         </v-row>
       </v-footer>

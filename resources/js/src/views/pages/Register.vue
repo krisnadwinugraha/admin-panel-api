@@ -14,7 +14,7 @@
               class="me-3"
             ></v-img>
 
-            <h2 class="text-2xl font-weight-semibold">Spasi Digicode</h2>
+            <h2 class="text-2xl font-weight-semibold">Admin Panel</h2>
           </router-link>
         </v-card-title>
 

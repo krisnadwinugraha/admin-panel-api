@@ -6,7 +6,7 @@
         <v-card-title class="d-flex align-center justify-center py-7">
           <router-link to="/" class="d-flex align-center">
             <v-img
-              :src="require('@/assets/images/logos/logo-spasi.png')"
+              :src="require('@/assets/images/logos/logo.png')"
               max-height="30px"
               max-width="30px"
               alt="logo"
@@ -14,7 +14,7 @@
               class="me-3"
             ></v-img>
 
-            <h2 class="text-2xl font-weight-semibold">Spasi Digicode</h2>
+            <h2 class="text-2xl font-weight-semibold">Admin Panel</h2>
           </router-link>
         </v-card-title>
 

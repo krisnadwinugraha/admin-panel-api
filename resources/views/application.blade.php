@@ -7,10 +7,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Spasi Digicode</title>
+  <title>Admin Panel</title>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ asset('images/logos/logo-spasi.png') }}">
+  <link rel="shortcut icon" href="{{ asset('images/logos/logo.png') }}">
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 
   <!-- Font -->
