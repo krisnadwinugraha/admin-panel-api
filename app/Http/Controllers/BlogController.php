@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -46,8 +47,8 @@ class BlogController extends Controller
     
     public function search(Request $request)
     {
-        $blogs = Blog::where('title', 'like', '%' . $request->keywords . '%')
-        ->orWhere('category', 'like', '%' . $request->keywords . '%')
+        $blogs = Blog::with('categoryId')->where('title', 'like', '%' . $request->keywords . '%')
+        ->orWhere('category_id', 'like', '%' . $request->keywords . '%')
         ->orWhere('content', 'like', '%' . $request->keywords . '%')->paginate(5);
         return response()->json($blogs); 
     }

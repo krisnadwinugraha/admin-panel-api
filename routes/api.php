@@ -33,12 +33,12 @@ Route::prefix('auth')->group(function(){
 });
 
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::resource('users', UserController::class)->only(['index','store','show','update','destroy']);
-    Route::resource('categories', CategoryController::class)->only(['index','store','show','update','destroy']);
-    Route::resource('products', ProductController::class)->only(['index','store','show','update','destroy']);
-    Route::resource('blogs', BlogController::class)->only(['index','store','show','update','destroy']);
-    Route::resource('transactions', TransactionController::class)->only(['index','store','show','update','destroy']);
-    Route::resource('roles', RoleController::class)->only(['index','store','show','update','destroy']);
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('categories', CategoryController::class);
+    Route::apiResource('products', ProductController::class);
+    Route::apiResource('blogs', BlogController::class);
+    Route::apiResource('transactions', TransactionController::class);
+    Route::apiResource('roles', RoleController::class);
 
     Route::get('get-all-categories', [CategoryController::class, 'getAllCategories']);
     Route::get('get-all-products', [ProductController::class, 'getAllProducts']);

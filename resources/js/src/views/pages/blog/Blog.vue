@@ -64,6 +64,7 @@ export default {
   data() {
     return {
       blogs: [],
+      categories: [],
       keywords: null,
       lastPage: '',
       currentPage: 1,
@@ -76,6 +77,7 @@ export default {
   },
   mounted() {
     this.getBlogs()
+    this.getCategories()
   },
   methods: {
     async getBlogs() {
@@ -88,6 +90,17 @@ export default {
         .catch(error => {
           console.log(error)
           this.blogs = []
+        })
+    },
+    async getCategories() {
+      await axios
+        .get(`/api/get-all-categories`)
+        .then(response => {
+          this.categories = response.data
+        })
+        .catch(error => {
+          console.log(error)
+          this.categories = []
         })
     },
     deleteBlog(id) {

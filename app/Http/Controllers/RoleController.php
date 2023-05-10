@@ -46,8 +46,7 @@ class RoleController extends Controller
 
     public function search(Request $request)
     {
-        $roles = Role::where('name', 'like', '%' . $request->keywords . '%')
-        ->orWhere('email', 'like', '%' . $request->keywords . '%')->paginate(5);
+        $roles = Role::where('name', 'like', '%' . $request->keywords . '%')->paginate(5);
         return response()->json($roles); 
     }
 }
